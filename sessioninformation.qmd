@@ -1,0 +1,28 @@
+# Session Information
+
+Session information updated 2.10.2023.
+
+## Basic Session Information
+
+```{r}
+#| label: session-info
+
+sesh_info <- sessionInfo()
+sesh_info$R.version$quarto <- paste(
+  system("quarto -V", intern = TRUE)[1],
+  "@",
+  quarto::quarto_path()
+)
+
+print(sesh_info, RNG = TRUE)
+sesh_info$R.version
+```
+
+## Diagnostics for `renv`
+
+```{r}
+#| label: renv-info
+
+renv::diagnostics()
+
+```

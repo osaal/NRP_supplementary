@@ -1,11 +1,13 @@
 ---
-title: "NRP_supplementary"
+title: "Networks of Risk Perception - Supplementary Website"
 ---
 
-This is a Quarto website.
+This website is a supplement to the chapter"Networks of Risk Perception" by Jan-Erik Anderson, Alisa Puustinen & Oliver Saal, to be published in the anthology *Information Resilience in a Complex System of National Security*.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+The website contains the necessary R code to reproduce all analyses published in the original article. It also contains robustness checks and other model analyses deemed important for the reproduction and confirmation of the results, but not published in the main manuscript.
 
-```{r}
-1 + 1
-```
+[For questions regarding the article itself]{.underline}, please contact the corresponding author according to the anthology instructions.
+
+[For questions regarding this supplementary website]{.underline}, please contact O. Saal. Contact information is published in the anthology chapter.
+
+This website was written using the **Quarto** publishing system and hosted with **GitHub Pages.**

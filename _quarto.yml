@@ -1,20 +1,25 @@
 project:
   type: website
   output-dir: docs
+execute: 
+  freeze: auto
 
 website:
-  title: "NRP_supplementary"
+  title: "NRP - Supplement"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - 01_datapreparation.qmd
+      - sessioninformation.qmd
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    reference-location: margin
+    citation-location: margin
 
 editor: visual
 

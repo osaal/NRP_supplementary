@@ -1,0 +1,171 @@
+# Data Preparation
+
+## Exporting from SPSS and naming conventions
+
+The data were collected by a third party and given to the researchers as an SPSS data file. We selected the necessary variables from the full data set and exported them in `.csv` format for analysis in R.
+
+@tbl-spss-exported-variables shows the collected variables with original questions and short-hand names.
+
+| Exported name      | Survey question                                                                                                          | Short-hand name |
+|----------------|---------------------------------------|-----------------|
+| question_3_row_1   | Extreme weather phenomena (flood, drought, storm etc.)                                                                   | Weather         |
+| question_3_row_2   | Traffic accident                                                                                                         | Traffic         |
+| question_3_row_3   | Fire                                                                                                                     | Fire            |
+| question_3_row_4   | Nuclear power plant disaster                                                                                             | Nuclear         |
+| question_3_row_5   | Workplace accident                                                                                                       | Work            |
+| question_3_row_6   | Leisure-time accident (at home/at hobbies etc.)                                                                          | Leisure         |
+| question_3_row_7   | Attack with weapons directed at the Finnish state                                                                        | War             |
+| question_3_row_8   | Great environmental accident, such as an oil catastrophe                                                                 | Environmental   |
+| question_3_row_9   | Dangerous transmittable disease, pandemic                                                                                | Pandemic        |
+| question_3_row_10  | Illness, severely falling ill (e.g., life-threatening cancer)                                                            | Illness         |
+| question_3_row_11  | Act of violence                                                                                                          | Violence        |
+| question_3_row_12  | Operational failure directed at e.g., electrical, water, or food supply, information traffic or the informational system | Operational     |
+| question_3_row_13  | Influencing through information, fake news, other so-called hybrid threats                                               | Hybrid          |
+| question_3_row_14  | Growth of tensions between social groups, polarization                                                                   | Polarization    |
+| question_25_row_1  | Yes, regarding a fire                                                                                                    | Fire_Exp        |
+| question_25_row_2  | Yes, regarding a traffic accident                                                                                        | Traffic_Exp     |
+| question_25_row_3  | Yes, regarding another accident                                                                                          | Accident_Exp    |
+| question_25_row_4  | Yes, regarding another rescue event                                                                                      | Rescue_Exp      |
+| question_25_row_5  | Yes, leisure-time accident                                                                                               | Leisure_Exp     |
+| question_25_row_6  | Yes, workplace accident                                                                                                  | Work_Exp        |
+| question_25_row_7  | Yes, illness                                                                                                             | Illness_Exp     |
+| question_25_row_8  | Yes, an inspection visit                                                                                                 | Inspection_Exp  |
+| question_25_row_9  | Yes, safety education                                                                                                    | Education_Exp   |
+| question_25_row_10 | Yes, public event, visit etc. (A Day at the Fire Station, a fair, 112 Day, local events)                                 | Event_Exp       |
+| question_25_row_11 | Yes, in social media or otherwise on-line                                                                                | Internet_Exp    |
+| question_25_row_12 | Yes, something else                                                                                                      | Other_Exp       |
+| question_25_row_13 | I have not been engaged with emergency services personnel                                                                | No_Experience   |
+| question_25_row_14 | I cannot say                                                                                                             | CannotSay_Exp   |
+
+: Variables exported from SPSS {#tbl-spss-exported-variables}
+
+The first fourteen variables (`question_3_row_1` to `question_3_row_14`) are the risk perception variables, all collected as a question battery with the following translated main question: *How likely do You think you are to encounter the following threats or dangers in Your personal life?*[^01_datapreparation-1]
+
+[^01_datapreparation-1]: Original in Finnish: *Kuinka todennäköisenä pidätte seuraavien uhkien tai vaarojen kohtaamista henkilökohtaisessa elämässänne?*
+
+The following fourteen variables (`question_25_row_1` to `question_25_row_14`) are measurements of risk experiences, all collected as a question battery with the following translated main question: *Have You, in the past 12 months, been engaged with emergency services personnel?*[^01_datapreparation-2]
+
+[^01_datapreparation-2]: Original in Finnish: *Oletteko ollut viimeisen 12 kk aikana tekemisissä pelastushenkilöstön kanssa?*
+
+All variables listed in @tbl-spss-exported-variables were exported into a `.csv` file using the SPSS function `File > Export > CSV Data...` using default settings and selecting only those variables listed. The file was saved as `emergencyservicesattitudes2023.csv` and was used in subsequent analyses in R.
+
+## Setting up R Environment
+
+We initialised the R environment with the following packages:
+
+```{r}
+#| label: setup
+
+# Clear environment first
+rm(list=ls())
+resetpar <- par(no.readonly = TRUE)
+
+# Setup directories and libraries
+packages <- c(
+  "tidyverse", "naniar"
+)
+lapply(packages, library, character.only = TRUE)
+```
+
+## Import into R and Recoding
+
+The data were then imported into R and saved as a variable.
+
+```{r}
+data <- tibble(read.csv2("emergencyservicesattitudes2023.csv"))
+```
+
+We changed the original coding of the fourteen risk variables to match a logical structure according to @tbl-risk-variables-recode below.
+
+| Original code | Label             | New code  |
+|---------------|-------------------|-----------|
+| 1             | Likely            | 4         |
+| 2             | Somewhat likely   | 3         |
+| 3             | Somewhat unlikely | 2         |
+| 4             | Unlikely          | 1         |
+| 5             | I cannot say      | *missing* |
+
+: Recoding of risk perception variables {#tbl-risk-variables-recode}
+
+```{r}
+data <- data %>%
+  dplyr::rename(
+    Weather = question_3_row_1,
+    Traffic = question_3_row_2,
+    Fire = question_3_row_3,
+    Nuclear = question_3_row_4,
+    Work = question_3_row_5,
+    Leisure = question_3_row_6,
+    War = question_3_row_7,
+    Environmental = question_3_row_8,
+    Pandemic = question_3_row_9,
+    Illness = question_3_row_10,
+    Violence = question_3_row_11,
+    Operational = question_3_row_12,
+    Hybrid = question_3_row_13,
+    Polarization = question_3_row_14,
+    Fire_Exp = question_25_row_1,
+    Traffic_Exp = question_25_row_2,
+    Accident_Exp = question_25_row_3,
+    Rescue_Exp = question_25_row_4,
+    Leisure_Exp = question_25_row_5,
+    Work_Exp = question_25_row_6,
+    Illness_Exp = question_25_row_7,
+    Inspection_Exp = question_25_row_8,
+    Education_Exp = question_25_row_9,
+    Event_Exp = question_25_row_10,
+    Internet_Exp = question_25_row_11,
+    Other_Exp = question_25_row_12,
+    No_Experience = question_25_row_13,
+    CannotSay_Exp = question_25_row_14
+  )
+
+data <- data %>%
+  dplyr::mutate(
+    across(
+      Weather:Polarization,
+      ~case_match(
+        .,
+        1 ~ 4,
+        2 ~ 3,
+        3 ~ 2,
+        4 ~ 1
+      )
+    )
+  )
+
+data <- data %>%
+  naniar::replace_with_na_all(., condition = ~.x == 5)
+```
+
+We did not change the risk experience variables' coding scheme, as it was already suitable for analysis. Risk experiences were coded either as `0` (not selected, i.e., "no") or `1` (selected, i.e., "yes").
+
+Risk experiences were originally piped in the survey in the following way:
+
+-   The question was a multiple-choice question, with no restrictions on how many choices the respondent made (except for the ones below).
+
+```{=html}
+<!-- -->
+```
+-   If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.
+
+-   If a respondent chose "I have not been engaged with emergency services personnel", all other choices became unavailable.
+
+-   If a respondent chose "I cannot say", all other choices became unavailable.
+
+-   Thus, the maximum choices were twelve unique emergency services personnel contact experiences.
+
+-   Choosing "No" or "Cannot say" was exclusive to all other responses.
+
+## Checking Correctness of Data
+
+We then proceeded to check that all data had been correctly entered and modified. The results are in @tbl-data-summary (the table is very wide!).
+
+```{r}
+#| label: tbl-data-summary
+#| tbl-cap: Summary of all variables after recoding
+#| column: screen
+knitr::kable(summary(data, digits = 2))
+```
+
+The original data set had no missing values on any variable. Since there are missing values on the fourteen risk perception variables, we conclude that the conversion is correct. There are no missing values on the experience variables, which is to be expected, as the lack of response to one variable was coded as `0` ("no").

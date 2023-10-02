@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NRP - Supplement – datapreparation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">NRP - Supplement</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./01_datapreparation.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Data Preparation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./sessioninformation.html" rel="" target="">
+ <span class="menu-text">Session Information</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation">Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#exporting-from-spss-and-naming-conventions" id="toc-exporting-from-spss-and-naming-conventions" class="nav-link" data-scroll-target="#exporting-from-spss-and-naming-conventions">Exporting from SPSS and naming conventions</a></li>
+  <li><a href="#setting-up-r-environment" id="toc-setting-up-r-environment" class="nav-link" data-scroll-target="#setting-up-r-environment">Setting up R Environment</a></li>
+  <li><a href="#import-into-r-and-recoding" id="toc-import-into-r-and-recoding" class="nav-link" data-scroll-target="#import-into-r-and-recoding">Import into R and Recoding</a></li>
+  <li><a href="#checking-correctness-of-data" id="toc-checking-correctness-of-data" class="nav-link" data-scroll-target="#checking-correctness-of-data">Checking Correctness of Data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+
+<section id="data-preparation" class="level1 page-columns page-full">
+<h1>Data Preparation</h1>
+<section id="exporting-from-spss-and-naming-conventions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="exporting-from-spss-and-naming-conventions">Exporting from SPSS and naming conventions</h2>
+<p>The data were collected by a third party and given to the researchers as an SPSS data file. We selected the necessary variables from the full data set and exported them in <code>.csv</code> format for analysis in R.</p>
+<p><a href="#tbl-spss-exported-variables">Table&nbsp;1</a> shows the collected variables with original questions and short-hand names.</p>
+<div id="tbl-spss-exported-variables" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Variables exported from SPSS</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 54%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Exported name</th>
+<th>Survey question</th>
+<th>Short-hand name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>question_3_row_1</td>
+<td>Extreme weather phenomena (flood, drought, storm etc.)</td>
+<td>Weather</td>
+</tr>
+<tr class="even">
+<td>question_3_row_2</td>
+<td>Traffic accident</td>
+<td>Traffic</td>
+</tr>
+<tr class="odd">
+<td>question_3_row_3</td>
+<td>Fire</td>
+<td>Fire</td>
+</tr>
+<tr class="even">
+<td>question_3_row_4</td>
+<td>Nuclear power plant disaster</td>
+<td>Nuclear</td>
+</tr>
+<tr class="odd">
+<td>question_3_row_5</td>
+<td>Workplace accident</td>
+<td>Work</td>
+</tr>
+<tr class="even">
+<td>question_3_row_6</td>
+<td>Leisure-time accident (at home/at hobbies etc.)</td>
+<td>Leisure</td>
+</tr>
+<tr class="odd">
+<td>question_3_row_7</td>
+<td>Attack with weapons directed at the Finnish state</td>
+<td>War</td>
+</tr>
+<tr class="even">
+<td>question_3_row_8</td>
+<td>Great environmental accident, such as an oil catastrophe</td>
+<td>Environmental</td>
+</tr>
+<tr class="odd">
+<td>question_3_row_9</td>
+<td>Dangerous transmittable disease, pandemic</td>
+<td>Pandemic</td>
+</tr>
+<tr class="even">
+<td>question_3_row_10</td>
+<td>Illness, severely falling ill (e.g., life-threatening cancer)</td>
+<td>Illness</td>
+</tr>
+<tr class="odd">
+<td>question_3_row_11</td>
+<td>Act of violence</td>
+<td>Violence</td>
+</tr>
+<tr class="even">
+<td>question_3_row_12</td>
+<td>Operational failure directed at e.g., electrical, water, or food supply, information traffic or the informational system</td>
+<td>Operational</td>
+</tr>
+<tr class="odd">
+<td>question_3_row_13</td>
+<td>Influencing through information, fake news, other so-called hybrid threats</td>
+<td>Hybrid</td>
+</tr>
+<tr class="even">
+<td>question_3_row_14</td>
+<td>Growth of tensions between social groups, polarization</td>
+<td>Polarization</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_1</td>
+<td>Yes, regarding a fire</td>
+<td>Fire_Exp</td>
+</tr>
+<tr class="even">
+<td>question_25_row_2</td>
+<td>Yes, regarding a traffic accident</td>
+<td>Traffic_Exp</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_3</td>
+<td>Yes, regarding another accident</td>
+<td>Accident_Exp</td>
+</tr>
+<tr class="even">
+<td>question_25_row_4</td>
+<td>Yes, regarding another rescue event</td>
+<td>Rescue_Exp</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_5</td>
+<td>Yes, leisure-time accident</td>
+<td>Leisure_Exp</td>
+</tr>
+<tr class="even">
+<td>question_25_row_6</td>
+<td>Yes, workplace accident</td>
+<td>Work_Exp</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_7</td>
+<td>Yes, illness</td>
+<td>Illness_Exp</td>
+</tr>
+<tr class="even">
+<td>question_25_row_8</td>
+<td>Yes, an inspection visit</td>
+<td>Inspection_Exp</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_9</td>
+<td>Yes, safety education</td>
+<td>Education_Exp</td>
+</tr>
+<tr class="even">
+<td>question_25_row_10</td>
+<td>Yes, public event, visit etc. (A Day at the Fire Station, a fair, 112 Day, local events)</td>
+<td>Event_Exp</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_11</td>
+<td>Yes, in social media or otherwise on-line</td>
+<td>Internet_Exp</td>
+</tr>
+<tr class="even">
+<td>question_25_row_12</td>
+<td>Yes, something else</td>
+<td>Other_Exp</td>
+</tr>
+<tr class="odd">
+<td>question_25_row_13</td>
+<td>I have not been engaged with emergency services personnel</td>
+<td>No_Experience</td>
+</tr>
+<tr class="even">
+<td>question_25_row_14</td>
+<td>I cannot say</td>
+<td>CannotSay_Exp</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="page-columns page-full"><p>The first fourteen variables (<code>question_3_row_1</code> to <code>question_3_row_14</code>) are the risk perception variables, all collected as a question battery with the following translated main question: <em>How likely do You think you are to encounter the following threats or dangers in Your personal life?</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Original in Finnish: <em>Kuinka todennäköisenä pidätte seuraavien uhkien tai vaarojen kohtaamista henkilökohtaisessa elämässänne?</em></p></li></div></div>
+<div class="page-columns page-full"><p>The following fourteen variables (<code>question_25_row_1</code> to <code>question_25_row_14</code>) are measurements of risk experiences, all collected as a question battery with the following translated main question: <em>Have You, in the past 12 months, been engaged with emergency services personnel?</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Original in Finnish: <em>Oletteko ollut viimeisen 12 kk aikana tekemisissä pelastushenkilöstön kanssa?</em></p></li></div></div>
+<p>All variables listed in <a href="#tbl-spss-exported-variables">Table&nbsp;1</a> were exported into a <code>.csv</code> file using the SPSS function <code>File &gt; Export &gt; CSV Data...</code> using default settings and selecting only those variables listed. The file was saved as <code>emergencyservicesattitudes2023.csv</code> and was used in subsequent analyses in R.</p>
+</section>
+<section id="setting-up-r-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-r-environment">Setting up R Environment</h2>
+<p>We initialised the R environment with the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment first</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>resetpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup directories and libraries</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"naniar"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+ [1] "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"     "readr"    
+ [7] "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"     "graphics" 
+[13] "grDevices" "datasets"  "utils"     "methods"   "base"     
+
+[[2]]
+ [1] "naniar"    "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"    
+ [7] "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"    
+[13] "graphics"  "grDevices" "datasets"  "utils"     "methods"   "base"     </code></pre>
+</div>
+</div>
+</section>
+<section id="import-into-r-and-recoding" class="level2">
+<h2 class="anchored" data-anchor-id="import-into-r-and-recoding">Import into R and Recoding</h2>
+<p>The data were then imported into R and saved as a variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="fu">read.csv2</span>(<span class="st">"emergencyservicesattitudes2023.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We changed the original coding of the fourteen risk variables to match a logical structure according to <a href="#tbl-risk-variables-recode">Table&nbsp;2</a> below.</p>
+<div id="tbl-risk-variables-recode" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2: Recoding of risk perception variables</caption>
+<thead>
+<tr class="header">
+<th>Original code</th>
+<th>Label</th>
+<th>New code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Likely</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Somewhat likely</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Somewhat unlikely</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Unlikely</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>I cannot say</td>
+<td><em>missing</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Weather =</span> question_3_row_1,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Traffic =</span> question_3_row_2,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fire =</span> question_3_row_3,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Nuclear =</span> question_3_row_4,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Work =</span> question_3_row_5,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Leisure =</span> question_3_row_6,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">War =</span> question_3_row_7,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Environmental =</span> question_3_row_8,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pandemic =</span> question_3_row_9,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Illness =</span> question_3_row_10,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Violence =</span> question_3_row_11,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Operational =</span> question_3_row_12,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Hybrid =</span> question_3_row_13,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Polarization =</span> question_3_row_14,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fire_Exp =</span> question_25_row_1,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Traffic_Exp =</span> question_25_row_2,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Accident_Exp =</span> question_25_row_3,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Rescue_Exp =</span> question_25_row_4,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Leisure_Exp =</span> question_25_row_5,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Work_Exp =</span> question_25_row_6,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">Illness_Exp =</span> question_25_row_7,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">Inspection_Exp =</span> question_25_row_8,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Education_Exp =</span> question_25_row_9,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Event_Exp =</span> question_25_row_10,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Internet_Exp =</span> question_25_row_11,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Other_Exp =</span> question_25_row_12,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">No_Experience =</span> question_25_row_13,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">CannotSay_Exp =</span> question_25_row_14</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>      Weather<span class="sc">:</span>Polarization,</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span><span class="fu">case_match</span>(</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        .,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We did not change the risk experience variables’ coding scheme, as it was already suitable for analysis. Risk experiences were coded either as <code>0</code> (not selected, i.e., “no”) or <code>1</code> (selected, i.e., “yes”).</p>
+<p>Risk experiences were originally piped in the survey in the following way:</p>
+<ul>
+<li>The question was a multiple-choice question, with no restrictions on how many choices the respondent made (except for the ones below).</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.</p></li>
+<li><p>If a respondent chose “I have not been engaged with emergency services personnel”, all other choices became unavailable.</p></li>
+<li><p>If a respondent chose “I cannot say”, all other choices became unavailable.</p></li>
+<li><p>Thus, the maximum choices were twelve unique emergency services personnel contact experiences.</p></li>
+<li><p>Choosing “No” or “Cannot say” was exclusive to all other responses.</p></li>
+</ul>
+</section>
+<section id="checking-correctness-of-data" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="checking-correctness-of-data">Checking Correctness of Data</h2>
+<p>We then proceeded to check that all data had been correctly entered and modified. The results are in <a href="#tbl-data-summary">Table&nbsp;3</a> (the table is very wide!).</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(data, <span class="at">digits =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display column-screen">
+<div id="tbl-data-summary" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;3: Summary of all variables after recoding</caption>
+<colgroup>
+<col style="width: 0%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Weather</th>
+<th style="text-align: left;">Traffic</th>
+<th style="text-align: left;">Fire</th>
+<th style="text-align: left;">Nuclear</th>
+<th style="text-align: left;">Work</th>
+<th style="text-align: left;">Leisure</th>
+<th style="text-align: left;">War</th>
+<th style="text-align: left;">Environmental</th>
+<th style="text-align: left;">Pandemic</th>
+<th style="text-align: left;">Illness</th>
+<th style="text-align: left;">Violence</th>
+<th style="text-align: left;">Operational</th>
+<th style="text-align: left;">Hybrid</th>
+<th style="text-align: left;">Polarization</th>
+<th style="text-align: left;">Fire_Exp</th>
+<th style="text-align: left;">Traffic_Exp</th>
+<th style="text-align: left;">Accident_Exp</th>
+<th style="text-align: left;">Rescue_Exp</th>
+<th style="text-align: left;">Leisure_Exp</th>
+<th style="text-align: left;">Work_Exp</th>
+<th style="text-align: left;">Illness_Exp</th>
+<th style="text-align: left;">Inspection_Exp</th>
+<th style="text-align: left;">Education_Exp</th>
+<th style="text-align: left;">Event_Exp</th>
+<th style="text-align: left;">Internet_Exp</th>
+<th style="text-align: left;">Other_Exp</th>
+<th style="text-align: left;">No_Experience</th>
+<th style="text-align: left;">CannotSay_Exp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :1.0</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.00</td>
+<td style="text-align: left;">Min. :0.00</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.00</td>
+<td style="text-align: left;">Min. :0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1st Qu.:1.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:1.0</td>
+<td style="text-align: left;">1st Qu.:1</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:1.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:2.0</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.00</td>
+<td style="text-align: left;">1st Qu.:0.00</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.00</td>
+<td style="text-align: left;">1st Qu.:0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Median :2.0</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :2.0</td>
+<td style="text-align: left;">Median :2.0</td>
+<td style="text-align: left;">Median :2</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :2.0</td>
+<td style="text-align: left;">Median :2.0</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :2.0</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :3.0</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.00</td>
+<td style="text-align: left;">Median :0.00</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :1.00</td>
+<td style="text-align: left;">Median :0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Mean :2.3</td>
+<td style="text-align: left;">Mean :2.7</td>
+<td style="text-align: left;">Mean :2.4</td>
+<td style="text-align: left;">Mean :1.7</td>
+<td style="text-align: left;">Mean :2</td>
+<td style="text-align: left;">Mean :2.8</td>
+<td style="text-align: left;">Mean :2.1</td>
+<td style="text-align: left;">Mean :2.2</td>
+<td style="text-align: left;">Mean :2.9</td>
+<td style="text-align: left;">Mean :2.8</td>
+<td style="text-align: left;">Mean :2.2</td>
+<td style="text-align: left;">Mean :2.8</td>
+<td style="text-align: left;">Mean :2.9</td>
+<td style="text-align: left;">Mean :2.7</td>
+<td style="text-align: left;">Mean :0.035</td>
+<td style="text-align: left;">Mean :0.034</td>
+<td style="text-align: left;">Mean :0.033</td>
+<td style="text-align: left;">Mean :0.034</td>
+<td style="text-align: left;">Mean :0.054</td>
+<td style="text-align: left;">Mean :0.03</td>
+<td style="text-align: left;">Mean :0.11</td>
+<td style="text-align: left;">Mean :0.038</td>
+<td style="text-align: left;">Mean :0.047</td>
+<td style="text-align: left;">Mean :0.046</td>
+<td style="text-align: left;">Mean :0.029</td>
+<td style="text-align: left;">Mean :0.033</td>
+<td style="text-align: left;">Mean :0.64</td>
+<td style="text-align: left;">Mean :0.023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:2.0</td>
+<td style="text-align: left;">3rd Qu.:3</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:4.0</td>
+<td style="text-align: left;">3rd Qu.:3.0</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.00</td>
+<td style="text-align: left;">3rd Qu.:0.00</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:1.00</td>
+<td style="text-align: left;">3rd Qu.:0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :4.0</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.00</td>
+<td style="text-align: left;">Max. :1.00</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.00</td>
+<td style="text-align: left;">Max. :1.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">NA’s :56</td>
+<td style="text-align: left;">NA’s :167</td>
+<td style="text-align: left;">NA’s :150</td>
+<td style="text-align: left;">NA’s :173</td>
+<td style="text-align: left;">NA’s :246</td>
+<td style="text-align: left;">NA’s :103</td>
+<td style="text-align: left;">NA’s :170</td>
+<td style="text-align: left;">NA’s :156</td>
+<td style="text-align: left;">NA’s :90</td>
+<td style="text-align: left;">NA’s :198</td>
+<td style="text-align: left;">NA’s :193</td>
+<td style="text-align: left;">NA’s :105</td>
+<td style="text-align: left;">NA’s :125</td>
+<td style="text-align: left;">NA’s :138</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The original data set had no missing values on any variable. Since there are missing values on the fourteen risk perception variables, we conclude that the conversion is correct. There are no missing values on the experience variables, which is to be expected, as the lack of response to one variable was coded as <code>0</code> (“no”).</p>
+
+
+</section>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
