@@ -11,6 +11,7 @@ website:
       - href: index.qmd
         text: Home
       - 01_datapreparation.qmd
+      - 02_networkestimation.qmd
       - sessioninformation.qmd
 
 format:

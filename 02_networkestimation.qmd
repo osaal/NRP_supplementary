@@ -1,0 +1,112 @@
+# Network Estimation
+
+We started by constructing a Gaussian graphical model of the fourteen risk perception variables using full information maximum likelihood (FIML) estimation. The plotted network is shown in @fig-network-estimation.
+
+```{r}
+#| label: fig-network-estimation
+#| fig-cap: Network of risk perceptions. Gaussian graphical model with full information using the FIML estimator.
+#| cache: true
+
+# Run setup script
+source("prerender.R")
+
+network_data <- data %>% dplyr::select(Weather:Polarization)
+network_labels <- names(network_data)
+
+single_net <- bootnet::estimateNetwork(
+  network_data,
+  default = "mgm",
+  tuning = 0.25,
+  criterion = "EBIC",
+  rule = "OR",
+  type = rep("c", 14)
+)
+
+# UNTESTED: Uncomment when next sections are cleaned from psychonetrics code.
+# network <- bootnet::bootnet(
+#   single_net,
+#   nBoots = 1000,
+#   default = "mgm",
+#   tuning = 0.25,
+#   rule = "OR",
+#   missing = "listwise",
+#   criterion = "EBIC",
+#   type = "case",
+#   nCores = 8,
+#   statistics = c(
+#     "edge",
+#     "strength",
+#     "closeness",
+#     "betweenness"
+#   )
+# )
+
+# model <- network_data %>%
+#   psychonetrics::ggm(., vars = network_labels, estimator = "FIML")  %>%
+#   psychonetrics::runmodel()
+# 
+# matrix <- psychonetrics::getmatrix(model, "omega")
+
+plot(single_net, layout = "circle", palette = "colorblind", edge.labels = TRUE)
+
+```
+
+Since the network is dense and difficult to read, we retrieved network statistics into @tbl-network-stats below.
+
+```{r}
+#| label: tbl-network-stats
+#| tbl-cap: Descriptive statistics of network nodes
+#| cache: true
+
+# FIX: Referencing psychonetrics model, using bootnet instead.
+# summary <- tibble(
+#   Node = model@parameters$var1[1:14],
+#   Maximum = summarise(as_tibble(matrix), across(everything(), max)) %>% unlist(., use.names=FALSE),
+#   Minimum = summarise(as_tibble(matrix), across(everything(), min)) %>% unlist(., use.names=FALSE),
+#   Mean = summarise(as_tibble(matrix), across(everything(), mean)) %>% unlist(., use.names=FALSE),
+#   SD = summarise(as_tibble(matrix), across(everything(), sd)) %>% unlist(., use.names=FALSE)
+# )
+# 
+# cent <- qgraph::centralityTable(
+#   matrix,
+#   standardized = FALSE
+# ) %>%
+#   reshape2::dcast(
+#     node ~ measure,
+#     value.var = "value"
+#   ) %>%
+#   rename(
+#     Node = "node"
+#   )
+# 
+# cent$Node <- case_match(
+#   as.integer(cent$Node),
+#   1 ~ "Weather",
+#   2 ~ "Traffic",
+#   3 ~ "Fire",
+#   4 ~ "Nuclear",
+#   5 ~ "Work", 
+#   6 ~ "Leisure",
+#   7 ~ "War",
+#   8 ~ "Environmental",
+#   9 ~ "Pandemic",
+#   10 ~ "Illness",
+#   11 ~ "Violence",
+#   12 ~ "Operational",
+#   13 ~ "Hybrid",
+#   14 ~ "Polarization"
+# )
+# 
+# summary <- left_join(summary, cent, by = "Node")
+# 
+# knitr::kable(
+#   summary,
+#   digits = 2,
+#   col.names = c("Node", "Maximum", "Minimum", "Mean", "SD", "Betweenness", "Closeness", "Strength", "Expected Influence")
+# )
+
+```
+
+## Robustness checks
+
+We then attempted a robustness check by bootstrapping the network structure and retrieving Correlation Stability (CS) coefficients for each of the four measures.

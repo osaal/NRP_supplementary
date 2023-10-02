@@ -7,7 +7,7 @@ The data were collected by a third party and given to the researchers as an SPSS
 @tbl-spss-exported-variables shows the collected variables with original questions and short-hand names.
 
 | Exported name      | Survey question                                                                                                          | Short-hand name |
-|----------------|---------------------------------------|-----------------|
+|--------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------|
 | question_3_row_1   | Extreme weather phenomena (flood, drought, storm etc.)                                                                   | Weather         |
 | question_3_row_2   | Traffic accident                                                                                                         | Traffic         |
 | question_3_row_3   | Fire                                                                                                                     | Fire            |
@@ -62,7 +62,7 @@ resetpar <- par(no.readonly = TRUE)
 
 # Setup directories and libraries
 packages <- c(
-  "tidyverse", "naniar"
+  "tidyverse", "naniar", "psychonetrics"
 )
 lapply(packages, library, character.only = TRUE)
 ```
@@ -144,9 +144,8 @@ Risk experiences were originally piped in the survey in the following way:
 
 -   The question was a multiple-choice question, with no restrictions on how many choices the respondent made (except for the ones below).
 
-```{=html}
 <!-- -->
-```
+
 -   If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.
 
 -   If a respondent chose "I have not been engaged with emergency services personnel", all other choices became unavailable.
