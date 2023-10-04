@@ -6,6 +6,8 @@ This website is a supplement to the chapter"Networks of Risk Perception" by Jan-
 
 The website contains the necessary R code to reproduce all analyses published in the original article. It also contains robustness checks and other model analyses deemed important for the reproduction and confirmation of the results, but not published in the main manuscript.
 
+Note that most data preparation is ran in this document in a pre-rendering script called `prerender.R`. The code is added at appropriate places in the text for visualisation, with the Quarto option of `eval: false`. The complete pre-rendering script is found in the [GitHub source of this page](https://github.com/osaal/NRP_supplementary/blob/master/prerender.R).
+
 [For questions regarding the article itself]{.underline}, please contact the corresponding author according to the anthology instructions.
 
 [For questions regarding this supplementary website]{.underline}, please contact O. Saal. Contact information is published in the anthology chapter.

@@ -164,6 +164,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="data-preparation" class="level1 page-columns page-full">
 <h1>Data Preparation</h1>
+<div class="cell" data-hash="01_datapreparation_cache/html/01-page-setup_b648741d2155f047b83787479310b9f5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"prerender.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+This is psychonetrics 0.11! Note: this is BETA software! Please mind that the package may not be stable and report any bugs! For more information, please see psychonetrics.org, for questions and issues, please see github.com/SachaEpskamp/psychonetrics.
+
+
+Attaching package: 'psychonetrics'
+
+
+The following object is masked from 'package:graphics':
+
+    identify
+
+
+This is bootnet 1.5.5
+
+For questions and issues, please see github.com/SachaEpskamp/bootnet.</code></pre>
+</div>
+</div>
 <section id="exporting-from-spss-and-naming-conventions" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="exporting-from-spss-and-naming-conventions">Exporting from SPSS and naming conventions</h2>
 <p>The data were collected by a third party and given to the researchers as an SPSS data file. We selected the necessary variables from the full data set and exported them in <code>.csv</code> format for analysis in R.</p>
@@ -172,9 +204,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="table">
 <caption>Table&nbsp;1: Variables exported from SPSS</caption>
 <colgroup>
-<col style="width: 12%">
-<col style="width: 76%">
-<col style="width: 10%">
+<col style="width: 22%">
+<col style="width: 55%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -334,62 +366,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setting-up-r-environment" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-r-environment">Setting up R Environment</h2>
 <p>We initialised the R environment with the following packages:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment first</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>resetpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup directories and libraries</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"naniar"</span>, <span class="st">"psychonetrics"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.3     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
-This is psychonetrics 0.11! Note: this is BETA software! Please mind that the package may not be stable and report any bugs! For more information, please see psychonetrics.org, for questions and issues, please see github.com/SachaEpskamp/psychonetrics.
-
-
-Attaching package: 'psychonetrics'
-
-
-The following object is masked from 'package:graphics':
-
-    identify</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
- [1] "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"     "readr"    
- [7] "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"     "graphics" 
-[13] "grDevices" "datasets"  "utils"     "methods"   "base"     
-
-[[2]]
- [1] "naniar"    "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"    
- [7] "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"    
-[13] "graphics"  "grDevices" "datasets"  "utils"     "methods"   "base"     
-
-[[3]]
- [1] "psychonetrics" "naniar"        "lubridate"     "forcats"      
- [5] "stringr"       "dplyr"         "purrr"         "readr"        
- [9] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[13] "stats"         "graphics"      "grDevices"     "datasets"     
-[17] "utils"         "methods"       "base"         </code></pre>
-</div>
+<div class="cell" data-hash="01_datapreparation_cache/html/setup_e2ff8a298b2a063ed006d14e9a29c6a3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment first</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>resetpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup directories and libraries</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"naniar"</span>, <span class="st">"psychonetrics"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="import-into-r-and-recoding" class="level2">
 <h2 class="anchored" data-anchor-id="import-into-r-and-recoding">Import into R and Recoding</h2>
 <p>The data were then imported into R and saved as a variable.</p>
-<div class="cell">
+<div class="cell" data-hash="01_datapreparation_cache/html/setup-2_c3a1cef372f205b053734a8e43b06595">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="fu">read.csv2</span>(<span class="st">"emergencyservicesattitudes2023.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We changed the original coding of the fourteen risk variables to match a logical structure according to <a href="#tbl-risk-variables-recode">Table&nbsp;2</a> below.</p>
 <div id="tbl-risk-variables-recode" class="anchored">
@@ -431,7 +430,9 @@ The following object is masked from 'package:graphics':
 </tbody>
 </table>
 </div>
-<div class="cell">
+<div class="cell" data-hash="01_datapreparation_cache/html/setup-3_4d68f810eb6ab038bb7af05f5f7f68c6">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Weather =</span> question_3_row_1,</span>
@@ -480,26 +481,72 @@ The following object is masked from 'package:graphics':
 <span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We did not change the risk experience variables’ coding scheme, as it was already suitable for analysis. Risk experiences were coded either as <code>0</code> (not selected, i.e., “no”) or <code>1</code> (selected, i.e., “yes”).</p>
 <p>Risk experiences were originally piped in the survey in the following way:</p>
 <ul>
 <li>The question was a multiple-choice question, with no restrictions on how many choices the respondent made (except for the ones below).</li>
+<li>If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.</li>
+<li>If a respondent chose “I have not been engaged with emergency services personnel”, all other choices became unavailable.</li>
+<li>If a respondent chose “I cannot say”, all other choices became unavailable.</li>
+<li>Thus, the maximum choices were twelve unique emergency services personnel contact experiences.</li>
+<li>Choosing “No” or “Cannot say” was exclusive to all other responses.</li>
 </ul>
-<!-- -->
-<ul>
-<li><p>If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.</p></li>
-<li><p>If a respondent chose “I have not been engaged with emergency services personnel”, all other choices became unavailable.</p></li>
-<li><p>If a respondent chose “I cannot say”, all other choices became unavailable.</p></li>
-<li><p>Thus, the maximum choices were twelve unique emergency services personnel contact experiences.</p></li>
-<li><p>Choosing “No” or “Cannot say” was exclusive to all other responses.</p></li>
-</ul>
+<p>The dataset measured self-reported contact experiences in multiple scenarios, seven of which were hazard-related: a fire, a traffic accident, a generic accident, a rescue-related event, a leisure-time accident, a work accident or an illness. Each variable was measured as a dichotomy, with <code>1</code> indicating an experience and <code>0</code> indicating a lack of experience. We first constructed a sum variable measuring <em>overall hazard experience</em>. However, a tabulation of the responses showed very low occurrence rates of more than one experience, so we opted to dichotomise the variable into having had no experiences or having had at least one experience. The cross-tabulation in <strong>?@tbl-hazard-experience-crosstab</strong> shows the results of the dichotomisation, in counts.</p>
+<div class="cell" data-hash="01_datapreparation_cache/html/setup-4_4c82e3b313c92a6b54c1dbe7612a4db2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Constructing the experience group</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>exp.variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Fire_Exp"</span>, <span class="st">"Traffic_Exp"</span>, <span class="st">"Accident_Exp"</span>, <span class="st">"Rescue_Exp"</span>, <span class="st">"Leisure_Exp"</span>, <span class="st">"Work_Exp"</span>, <span class="st">"Illness_Exp"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>experience <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data[, exp.variables]) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(., <span class="at">Experience.Dichotomy =</span> <span class="st">"."</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind experience to main dataset</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_cols</span>(data, experience)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>crosstab.comp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">3055</span>, <span class="at">ncol =</span> <span class="dv">2</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>exp.quantitative <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data[, exp.variables]) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>crosstab.comp<span class="sc">$</span>X1 <span class="ot">&lt;-</span> exp.quantitative<span class="sc">$</span>.</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>crosstab.comp<span class="sc">$</span>X2 <span class="ot">&lt;-</span> experience<span class="sc">$</span>Experience.Dichotomy</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(<span class="fu">table</span>(crosstab.comp<span class="sc">$</span>X1, crosstab.comp<span class="sc">$</span>X2, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Quantitative"</span>, <span class="st">"Dichotomous"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-hazard-experience-crosstab" class="cell tbl-parent quarto-layout-panel anchored" data-hash="01_datapreparation_cache/html/tbl-hazard-experience-crosstab_43c93d46a93775f9b02e775c7e378c5a">
+<div class="panel-caption table-caption">
+<p><strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<pre><code>             Dichotomous    0    1
+Quantitative                      
+0                        2319    0
+1                           0  567
+2                           0  110
+3                           0   42
+4                           0    7
+5                           0    4
+6                           0    1
+7                           0    5</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>The dichotomous groups have the following counts: 736 respondents have had at least one hazard experience, and 2319 respondents have not had a single hazard experience during the past 12 months.</p>
 </section>
 <section id="checking-correctness-of-data" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="checking-correctness-of-data">Checking Correctness of Data</h2>
 <p>We then proceeded to check that all data had been correctly entered and modified. The results are in <a href="#tbl-data-summary">Table&nbsp;3</a> (the table is very wide!).</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(data, <span class="at">digits =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-hash="01_datapreparation_cache/html/tbl-data-summary_1b76cf2225c804151251c0f78f29ff5b">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(data, <span class="at">digits =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display column-screen">
 <div id="tbl-data-summary" class="anchored">
 <table class="table table-sm table-striped small">
@@ -527,13 +574,14 @@ The following object is masked from 'package:graphics':
 <col style="width: 3%">
 <col style="width: 3%">
 <col style="width: 3%">
-<col style="width: 4%">
 <col style="width: 3%">
 <col style="width: 3%">
 <col style="width: 3%">
 <col style="width: 3%">
 <col style="width: 3%">
 <col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -566,6 +614,7 @@ The following object is masked from 'package:graphics':
 <th style="text-align: left;">Other_Exp</th>
 <th style="text-align: left;">No_Experience</th>
 <th style="text-align: left;">CannotSay_Exp</th>
+<th style="text-align: left;">Experience.Dichotomy</th>
 </tr>
 </thead>
 <tbody>
@@ -599,6 +648,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">Min. :0.000</td>
 <td style="text-align: left;">Min. :0.00</td>
 <td style="text-align: left;">Min. :0.000</td>
+<td style="text-align: left;">Min. :0.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
@@ -630,6 +680,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">1st Qu.:0.000</td>
 <td style="text-align: left;">1st Qu.:0.00</td>
 <td style="text-align: left;">1st Qu.:0.000</td>
+<td style="text-align: left;">1st Qu.:0.00</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
@@ -661,6 +712,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">Median :0.000</td>
 <td style="text-align: left;">Median :1.00</td>
 <td style="text-align: left;">Median :0.000</td>
+<td style="text-align: left;">Median :0.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
@@ -692,6 +744,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">Mean :0.033</td>
 <td style="text-align: left;">Mean :0.64</td>
 <td style="text-align: left;">Mean :0.023</td>
+<td style="text-align: left;">Mean :0.24</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
@@ -723,6 +776,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">3rd Qu.:0.000</td>
 <td style="text-align: left;">3rd Qu.:1.00</td>
 <td style="text-align: left;">3rd Qu.:0.000</td>
+<td style="text-align: left;">3rd Qu.:0.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
@@ -754,6 +808,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">Max. :1.000</td>
 <td style="text-align: left;">Max. :1.00</td>
 <td style="text-align: left;">Max. :1.000</td>
+<td style="text-align: left;">Max. :1.00</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
@@ -771,6 +826,7 @@ The following object is masked from 'package:graphics':
 <td style="text-align: left;">NA’s :105</td>
 <td style="text-align: left;">NA’s :125</td>
 <td style="text-align: left;">NA’s :138</td>
+<td style="text-align: left;">NA</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">NA</td>

@@ -3,6 +3,7 @@ project:
   output-dir: docs
 execute: 
   freeze: auto
+  cache: true
 
 website:
   title: "NRP - Supplement"
@@ -21,6 +22,11 @@ format:
     toc: true
     reference-location: margin
     citation-location: margin
+    code-fold: true
+
+knitr:
+  opts_chunk:
+    code_fold: true
 
 editor: visual
 

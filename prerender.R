@@ -2,6 +2,9 @@
 rm(list=ls())
 resetpar <- par(no.readonly = TRUE)
 
+# Set seed for bootstrapping reproduction
+set.seed(12345)
+
 # Setup directories and libraries
 packages <- c(
   "tidyverse", "naniar", "psychonetrics", "bootnet"
@@ -10,6 +13,7 @@ lapply(packages, library, character.only = TRUE)
 
 # Load data
 data <- tibble(read.csv2("emergencyservicesattitudes2023.csv"))
+# NB: The dataset cannot be published due to respondent privacy rights and a lack of publication consent.
 
 # Rename variables
 data <- data %>%
@@ -62,3 +66,13 @@ data <- data %>%
 # Assing missing values
 data <- data %>%
   naniar::replace_with_na_all(., condition = ~.x == 5)
+
+# Constructing the experience group
+exp.variables <- c("Fire_Exp", "Traffic_Exp", "Accident_Exp", "Rescue_Exp", "Leisure_Exp", "Work_Exp", "Illness_Exp")
+experience <- rowSums(data[, exp.variables]) %>%
+  tibble() %>%
+  dplyr::mutate(across(everything(), function(x) ifelse(x >= 1, 1, 0))) %>%
+  rename(., Experience.Dichotomy = ".")
+
+# Bind experience to main dataset
+data <- dplyr::bind_cols(data, experience)

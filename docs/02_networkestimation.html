@@ -150,6 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#network-estimation" id="toc-network-estimation" class="nav-link active" data-scroll-target="#network-estimation">Network Estimation</a>
   <ul class="collapse">
   <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks">Robustness checks</a></li>
+  <li><a href="#network-comparisons" id="toc-network-comparisons" class="nav-link" data-scroll-target="#network-comparisons">Network Comparisons</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -161,126 +162,451 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="network-estimation" class="level1">
 <h1>Network Estimation</h1>
-<p>We started by constructing a Gaussian graphical model of the fourteen risk perception variables using full information maximum likelihood (FIML) estimation. The plotted network is shown in <a href="#fig-network-estimation">Figure&nbsp;1</a>.</p>
-<div class="cell" data-hash="02_networkestimation_cache/html/fig-network-estimation_4123cfaf838854c2647c1c7e199cf9ce">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run setup script</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"prerender.R"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>network_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Weather<span class="sc">:</span>Polarization)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>network_labels <span class="ot">&lt;-</span> <span class="fu">names</span>(network_data)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>single_net <span class="ot">&lt;-</span> bootnet<span class="sc">::</span><span class="fu">estimateNetwork</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  network_data,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> <span class="st">"mgm"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">tuning =</span> <span class="fl">0.25</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">criterion =</span> <span class="st">"EBIC"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">rule =</span> <span class="st">"OR"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">rep</span>(<span class="st">"c"</span>, <span class="dv">14</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02_networkestimation_cache/html/02-setup_8902654764a7278f2af86ab53d65b982">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"prerender.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We chose to model a Gaussian graphical model (GGM) using the <code>ggmModSelect</code> model search algorithm (Foygel &amp; Drton, 2010; Epskamp et al., 2012). The algorithm uses a starting point selected with graphical least absolute shrinkage and selection operator (GLASSO) regression, after which it searches the model space by minimising the Bayesian Information Criterion (BIC; see Blanken, Isvoranu &amp; Epskamp, 2021: pp.&nbsp;118-120).</p>
+<p>The algorithm has been shown to present high sensitivity (true positive detection rate) and specificity (true negative detection rate), with the main drawback being a slow calculation time (Blanken, Isvoranu &amp; Epskamp, 2021: pp.&nbsp;118-120). However, simulation studies have shown that, at lower sample sizes (e.g., N = 300), sensitivity suffers a drop and the graphical model becomes more difficult to interpret (Blanken, Isvoranu &amp; Epskamp, 2021: p.&nbsp;125; Isvoranu &amp; Epskamp, 2021). Even though regularization methods may be more preferable at lower sample sizes, we opt to use the same modelling algorithm for both the main network model and the later comparative models, to ensure the validity of comparing models across analyses.</p>
+<p>Because our risk perception variables are ordered categorical data, we implement the <code>ggmModSelect</code> algorithm using polychoric correlations - a method that attempts to estimate an underlying continuity beneath Likert-type measurements (Olsson, 1979; Epskamp &amp; Fried, 2018). This method may be more unstable for low sample sizes as well as lead to conservative estimates (Blanken, Isvoranu &amp; Epskamp, 2021: pp.&nbsp;126-127).</p>
+<p>We handled missing data using pair-wise removal, as a more appropriate missing data procedure (e.g., full information maximum likelihood) is not implemented for ordinal data.</p>
+<p>The plotted network is shown in <a href="#fig-network-graph">Figure&nbsp;1</a>.</p>
+<div class="cell" data-hash="02_networkestimation_cache/html/network-bootstrap_ea2cea6c993398065efe897cfe0791cc">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>network_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Weather<span class="sc">:</span>Polarization)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>network_labels <span class="ot">&lt;-</span> <span class="fu">names</span>(network_data)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrapped using 8 logical processor cores. Change nCores for an appropriate maximum value for your computer to speed up bootstrapping accordingly.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The bootstrap takes approximately 14 minutes on an Intel Core i5-10310U processor using all eight cores.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> bootnet<span class="sc">::</span><span class="fu">bootnet</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  network_data,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> <span class="st">"ggmModSelect"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"case"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistics =</span> <span class="fu">c</span>(<span class="st">"edge"</span>, <span class="st">"strength"</span>, <span class="st">"closeness"</span>, <span class="st">"betweenness"</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">nCores =</span> <span class="dv">8</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">corMethod =</span> <span class="st">"cor_auto"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">missing =</span> <span class="st">"pairwise"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="st">"glasso"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">nonPositiveDefinite =</span> <span class="st">"continue"</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: bootnet will store only the following statistics:  edge, strength, closeness, betweenness</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Estimating sample network...</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Estimating Network. Using package::function:
-  - mgm::mgm for network computation
-    - Using glmnet::glmnet</code></pre>
+  - qgraph::ggmModSelect for model selection
+    - using glasso::glasso
+  - qgraph::cor_auto for correlation computation
+    - using lavaan::lavCor</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>'level' argument not assigned. Setting level to 1 for all Gaussian/Poisson variables and number of unique values for all categorical variables</code></pre>
+<pre><code>Variables detected as ordinal: Weather; Traffic; Fire; Nuclear; Work; Leisure; War; Environmental; Pandemic; Illness; Violence; Operational; Hybrid; Polarization</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in (function (data, type, level, tuning = 0.25, missing = c("listwise",
-: Bootnet does not support unsigned edges and treats these as positive edges.</code></pre>
+<pre><code>Running glasso to obtain starting model...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># UNTESTED: Uncomment when next sections are cleaned from psychonetrics code.</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># network &lt;- bootnet::bootnet(</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   single_net,</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   nBoots = 1000,</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   default = "mgm",</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   tuning = 0.25,</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   rule = "OR",</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   missing = "listwise",</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   criterion = "EBIC",</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   type = "case",</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   nCores = 8,</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   statistics = c(</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     "edge",</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     "strength",</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     "closeness",</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     "betweenness"</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- network_data %&gt;%</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   psychonetrics::ggm(., vars = network_labels, estimator = "FIML")  %&gt;%</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   psychonetrics::runmodel()</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix &lt;- psychonetrics::getmatrix(model, "omega")</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(single_net, <span class="at">layout =</span> <span class="st">"circle"</span>, <span class="at">palette =</span> <span class="st">"colorblind"</span>, <span class="at">edge.labels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing all edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing all edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Changed one edge...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing subset of edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Testing all edges...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bootstrapping...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Computing statistics...</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="02_networkestimation_cache/html/fig-network-graph_65ab950ecce96275b92a85f5ca7eb2d7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  network<span class="sc">$</span>sample,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">layout =</span> <span class="st">"circle"</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.labels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">theme =</span> <span class="st">"colorblind"</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div id="fig-network-estimation" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-network-graph" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="02_networkestimation_files/figure-html/fig-network-estimation-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Network of risk perceptions. Gaussian graphical model with full information using the FIML estimator.</figcaption>
+<p><img src="02_networkestimation_files/figure-html/fig-network-graph-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Graph of GGM modelling risk perception variables</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Since the network is dense and difficult to read, we retrieved network statistics into <strong>?@tbl-network-stats</strong> below.</p>
-<div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FIX: Referencing psychonetrics model, using bootnet instead.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary &lt;- tibble(</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   Node = model@parameters$var1[1:14],</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   Maximum = summarise(as_tibble(matrix), across(everything(), max)) %&gt;% unlist(., use.names=FALSE),</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   Minimum = summarise(as_tibble(matrix), across(everything(), min)) %&gt;% unlist(., use.names=FALSE),</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   Mean = summarise(as_tibble(matrix), across(everything(), mean)) %&gt;% unlist(., use.names=FALSE),</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   SD = summarise(as_tibble(matrix), across(everything(), sd)) %&gt;% unlist(., use.names=FALSE)</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># cent &lt;- qgraph::centralityTable(</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   matrix,</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   standardized = FALSE</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ) %&gt;%</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   reshape2::dcast(</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     node ~ measure,</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     value.var = "value"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;%</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   rename(</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     Node = "node"</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># cent$Node &lt;- case_match(</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   as.integer(cent$Node),</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   1 ~ "Weather",</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   2 ~ "Traffic",</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   3 ~ "Fire",</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   4 ~ "Nuclear",</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   5 ~ "Work", </span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   6 ~ "Leisure",</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#   7 ~ "War",</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   8 ~ "Environmental",</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#   9 ~ "Pandemic",</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   10 ~ "Illness",</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   11 ~ "Violence",</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   12 ~ "Operational",</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   13 ~ "Hybrid",</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   14 ~ "Polarization"</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co"># summary &lt;- left_join(summary, cent, by = "Node")</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::kable(</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#   summary,</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#   digits = 2,</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#   col.names = c("Node", "Maximum", "Minimum", "Mean", "SD", "Betweenness", "Closeness", "Strength", "Expected Influence")</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-network-stats" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Descriptive statistics of network nodes" data-hash="02_networkestimation_cache/html/tbl-network-stats_015033c2bc5426afe915c0384225bc24">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
+<p>We retrieved descriptive statistics for each node’s vertices, as well as node-wise centrality statistics. These are shown in <a href="#tbl-network-stats">Table&nbsp;1</a> below.</p>
+<div class="cell" data-hash="02_networkestimation_cache/html/tbl-network-stats_e36e6262af7cc5f73805e883d355e5e3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>summary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Node =</span> network<span class="sc">$</span>sample<span class="sc">$</span>labels,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Max =</span> <span class="fu">summarise</span>(<span class="fu">as_tibble</span>(network<span class="sc">$</span>sample<span class="sc">$</span>graph), <span class="fu">across</span>(<span class="fu">everything</span>(), max)) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>(., <span class="at">use.names=</span><span class="cn">FALSE</span>),</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Min =</span> <span class="fu">summarise</span>(<span class="fu">as_tibble</span>(network<span class="sc">$</span>sample<span class="sc">$</span>graph), <span class="fu">across</span>(<span class="fu">everything</span>(), min)) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>(., <span class="at">use.names=</span><span class="cn">FALSE</span>),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mean =</span> <span class="fu">summarise</span>(<span class="fu">as_tibble</span>(network<span class="sc">$</span>sample<span class="sc">$</span>graph), <span class="fu">across</span>(<span class="fu">everything</span>(), mean)) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>(., <span class="at">use.names=</span><span class="cn">FALSE</span>),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">SD =</span> <span class="fu">summarise</span>(<span class="fu">as_tibble</span>(network<span class="sc">$</span>sample<span class="sc">$</span>graph), <span class="fu">across</span>(<span class="fu">everything</span>(), sd)) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>(., <span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>cent <span class="ot">&lt;-</span> qgraph<span class="sc">::</span><span class="fu">centralityTable</span>(network<span class="sc">$</span>sample<span class="sc">$</span>graph, <span class="at">standardized =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  reshape2<span class="sc">::</span><span class="fu">dcast</span>(</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    node <span class="sc">~</span> measure,</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">value.var =</span> <span class="st">"value"</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Node =</span> <span class="st">"node"</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>summary <span class="ot">&lt;-</span> <span class="fu">left_join</span>(summary, cent, <span class="at">by =</span> <span class="st">"Node"</span>)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>  summary,</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Node"</span>, <span class="st">"Maximum"</span>, <span class="st">"Minimum"</span>, <span class="st">"Mean"</span>, <span class="st">"SD"</span>, <span class="st">"Betweenness"</span>, <span class="st">"Closeness"</span>, <span class="st">"Strength"</span>, <span class="st">"Expected Influence"</span>)</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-network-stats" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Descriptive statistics of network nodes</caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Node</th>
+<th style="text-align: right;">Maximum</th>
+<th style="text-align: right;">Minimum</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">Betweenness</th>
+<th style="text-align: right;">Closeness</th>
+<th style="text-align: right;">Strength</th>
+<th style="text-align: right;">Expected Influence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Weather</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">-0.07</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Traffic</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">-0.06</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.24</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fire</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">-0.08</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.32</td>
+<td style="text-align: right;">1.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nuclear</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">-0.08</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.16</td>
+<td style="text-align: right;">0.87</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Work</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">-0.18</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leisure</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">-0.05</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">0.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">War</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">-0.06</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.03</td>
+<td style="text-align: right;">0.80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Environmental</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.09</td>
+<td style="text-align: right;">1.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pandemic</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">-0.07</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.97</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Illness</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">-0.18</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">0.92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Violence</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">-0.07</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.06</td>
+<td style="text-align: right;">0.92</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Operational</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">1.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hybrid</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">-0.08</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">0.89</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Polarization</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">-0.05</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">0.83</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <section id="robustness-checks" class="level2">
 <h2 class="anchored" data-anchor-id="robustness-checks">Robustness checks</h2>
-<p>We then attempted a robustness check by bootstrapping the network structure and retrieving Correlation Stability (CS) coefficients for each of the four measures.</p>
+<p>We then attempted a robustness check by retrieving Correlation Stability (CS) coefficients for each of the four centrality measures. The coefficient estimates the number of cases that could be dropped from the sample to retain a correlation between the case-dropped centrality measures and the original in 95 per cent of cases (REF TO BOOTNET). It is recommended that the CS coefficient stay over 0.25, and preferably over 0.5, for reliable centrality measures.</p>
+<p>The results are shown visually in <a href="#fig-cs-stability">Figure&nbsp;2</a> below, with a dashed vertical line indicating a correlation of 0.7.</p>
+<div class="cell" data-hash="02_networkestimation_cache/html/fig-cs-stability_c2a65868683e56095b63f924c41d2411">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, <span class="at">statistics =</span> <span class="st">"all"</span>) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-cs-stability" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02_networkestimation_files/figure-html/fig-cs-stability-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Precise values are shown in the R output below.</p>
+<div class="cell" data-hash="02_networkestimation_cache/html/cs-stability-text-output_288d06af11a8b46d1e5b2e988e70a534">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bootnet<span class="sc">::</span><span class="fu">corStability</span>(network, <span class="at">cor =</span> <span class="fl">0.7</span>, <span class="at">statistics =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Correlation Stability Analysis === 
+
+Sampling levels tested:
+   nPerson Drop%   n
+1      764  75.0 115
+2     1001  67.2  88
+3     1239  59.4 113
+4     1477  51.7  90
+5     1714  43.9  84
+6     1952  36.1 101
+7     2189  28.3 104
+8     2427  20.6 116
+9     2665  12.8  93
+10    2902   5.0  96
+
+Maximum drop proportions to retain correlation of 0.7 in at least 95% of the samples:
+
+betweenness: 0.206 
+  - For more accuracy, run bootnet(..., caseMin = 0.128, caseMax = 0.283) 
+
+closeness: 0.517 
+  - For more accuracy, run bootnet(..., caseMin = 0.439, caseMax = 0.594) 
+
+edge: 0.75 (CS-coefficient is highest level tested)
+  - For more accuracy, run bootnet(..., caseMin = 0.672, caseMax = 1) 
+
+strength: 0.361 
+  - For more accuracy, run bootnet(..., caseMin = 0.283, caseMax = 0.439) 
+
+Accuracy can also be increased by increasing both 'nBoots' and 'caseN'.</code></pre>
+</div>
+</div>
+<p>The analysis shows that betweenness is too unstable to analyse, with only a 20 per cent case-drop causing the correlation with the original betweenness measure to drop below 0.7. Closeness and strength both hover around the mark of acceptable reliability, with edges being stable for up to 75 per cent case-dropping.</p>
+<p>This implies that the edges themselves are highly stable for interpretation, and ought not be affected by outliers or singular cases. Closeness and strength statistics may reliably be interpreted, although care should be taken with small differences. Betweenness, however, is unfortunately too unreliable to adequately interpret.</p>
+</section>
+<section id="network-comparisons" class="level2">
+<h2 class="anchored" data-anchor-id="network-comparisons">Network Comparisons</h2>
+<p>In the manuscript, we analyse whether the network structure differs significantly between respondents who, in the past 12 months, had been in contact with emergency services personnel with regards to a hazard experience, and respondents who had not.</p>
 
 
 </section>

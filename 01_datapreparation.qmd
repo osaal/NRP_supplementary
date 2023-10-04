@@ -1,5 +1,11 @@
 # Data Preparation
 
+```{r}
+#| label: 01-page-setup
+
+source("prerender.R")
+```
+
 ## Exporting from SPSS and naming conventions
 
 The data were collected by a third party and given to the researchers as an SPSS data file. We selected the necessary variables from the full data set and exported them in `.csv` format for analysis in R.
@@ -7,7 +13,7 @@ The data were collected by a third party and given to the researchers as an SPSS
 @tbl-spss-exported-variables shows the collected variables with original questions and short-hand names.
 
 | Exported name      | Survey question                                                                                                          | Short-hand name |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------|
+|----------------|----------------------------------------|----------------|
 | question_3_row_1   | Extreme weather phenomena (flood, drought, storm etc.)                                                                   | Weather         |
 | question_3_row_2   | Traffic accident                                                                                                         | Traffic         |
 | question_3_row_3   | Fire                                                                                                                     | Fire            |
@@ -55,6 +61,7 @@ We initialised the R environment with the following packages:
 
 ```{r}
 #| label: setup
+#| eval: false
 
 # Clear environment first
 rm(list=ls())
@@ -72,6 +79,8 @@ lapply(packages, library, character.only = TRUE)
 The data were then imported into R and saved as a variable.
 
 ```{r}
+#| label: setup-2
+#| eval: false
 data <- tibble(read.csv2("emergencyservicesattitudes2023.csv"))
 ```
 
@@ -88,6 +97,8 @@ We changed the original coding of the fourteen risk variables to match a logical
 : Recoding of risk perception variables {#tbl-risk-variables-recode}
 
 ```{r}
+#| label: setup-3
+#| eval: false
 data <- data %>%
   dplyr::rename(
     Weather = question_3_row_1,
@@ -143,18 +154,40 @@ We did not change the risk experience variables' coding scheme, as it was alread
 Risk experiences were originally piped in the survey in the following way:
 
 -   The question was a multiple-choice question, with no restrictions on how many choices the respondent made (except for the ones below).
-
-<!-- -->
-
 -   If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.
-
 -   If a respondent chose "I have not been engaged with emergency services personnel", all other choices became unavailable.
-
 -   If a respondent chose "I cannot say", all other choices became unavailable.
-
 -   Thus, the maximum choices were twelve unique emergency services personnel contact experiences.
-
 -   Choosing "No" or "Cannot say" was exclusive to all other responses.
+
+The dataset measured self-reported contact experiences in multiple scenarios, seven of which were hazard-related: a fire, a traffic accident, a generic accident, a rescue-related event, a leisure-time accident, a work accident or an illness. Each variable was measured as a dichotomy, with `1` indicating an experience and `0` indicating a lack of experience. We first constructed a sum variable measuring *overall hazard experience*. However, a tabulation of the responses showed very low occurrence rates of more than one experience, so we opted to dichotomise the variable into having had no experiences or having had at least one experience. The cross-tabulation in @tbl-hazard-experience-crosstab shows the results of the dichotomisation, in counts.
+
+```{r}
+#| label: setup-4
+#| eval: false
+
+# Constructing the experience group
+exp.variables <- c("Fire_Exp", "Traffic_Exp", "Accident_Exp", "Rescue_Exp", "Leisure_Exp", "Work_Exp", "Illness_Exp")
+experience <- rowSums(data[, exp.variables]) %>%
+  tibble() %>%
+  dplyr::mutate(across(everything(), function(x) ifelse(x >= 1, 1, 0))) %>%
+  rename(., Experience.Dichotomy = ".")
+
+# Bind experience to main dataset
+data <- dplyr::bind_cols(data, experience)
+```
+
+```{r}
+#| label: tbl-hazard-experience-crosstab
+
+crosstab.comp <- data.frame(matrix(nrow = 3055, ncol = 2))
+exp.quantitative <- rowSums(data[, exp.variables]) %>% tibble()
+crosstab.comp$X1 <- exp.quantitative$.
+crosstab.comp$X2 <- experience$Experience.Dichotomy
+ftable(table(crosstab.comp$X1, crosstab.comp$X2, dnn = c("Quantitative", "Dichotomous")))
+```
+
+The dichotomous groups have the following counts: 736 respondents have had at least one hazard experience, and 2319 respondents have not had a single hazard experience during the past 12 months.
 
 ## Checking Correctness of Data
 

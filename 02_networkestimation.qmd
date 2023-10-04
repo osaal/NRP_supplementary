@@ -1,112 +1,120 @@
 # Network Estimation
 
-We started by constructing a Gaussian graphical model of the fourteen risk perception variables using full information maximum likelihood (FIML) estimation. The plotted network is shown in @fig-network-estimation.
+```{r}
+#| label: 02-setup
+
+source("prerender.R")
+
+```
+
+We chose to model a Gaussian graphical model (GGM) using the `ggmModSelect` model search algorithm (Foygel & Drton, 2010; Epskamp et al., 2012). The algorithm uses a starting point selected with graphical least absolute shrinkage and selection operator (GLASSO) regression, after which it searches the model space by minimising the Bayesian Information Criterion (BIC; see Blanken, Isvoranu & Epskamp, 2021: pp. 118-120).
+
+The algorithm has been shown to present high sensitivity (true positive detection rate) and specificity (true negative detection rate), with the main drawback being a slow calculation time (Blanken, Isvoranu & Epskamp, 2021: pp. 118-120). However, simulation studies have shown that, at lower sample sizes (e.g., N = 300), sensitivity suffers a drop and the graphical model becomes more difficult to interpret (Blanken, Isvoranu & Epskamp, 2021: p. 125; Isvoranu & Epskamp, 2021). Even though regularization methods may be more preferable at lower sample sizes, we opt to use the same modelling algorithm for both the main network model and the later comparative models, to ensure the validity of comparing models across analyses.
+
+Because our risk perception variables are ordered categorical data, we implement the `ggmModSelect` algorithm using polychoric correlations - a method that attempts to estimate an underlying continuity beneath Likert-type measurements (Olsson, 1979; Epskamp & Fried, 2018). This method may be more unstable for low sample sizes as well as lead to conservative estimates (Blanken, Isvoranu & Epskamp, 2021: pp. 126-127).
+
+We handled missing data using pair-wise removal, as a more appropriate missing data procedure (e.g., full information maximum likelihood) is not implemented for ordinal data.
+
+The plotted network is shown in @fig-network-graph.
 
 ```{r}
-#| label: fig-network-estimation
+#| label: network-bootstrap
 #| fig-cap: Network of risk perceptions. Gaussian graphical model with full information using the FIML estimator.
 #| cache: true
-
-# Run setup script
-source("prerender.R")
 
 network_data <- data %>% dplyr::select(Weather:Polarization)
 network_labels <- names(network_data)
 
-single_net <- bootnet::estimateNetwork(
+# Bootstrapped using 8 logical processor cores. Change nCores for an appropriate maximum value for your computer to speed up bootstrapping accordingly.
+# The bootstrap takes approximately 14 minutes on an Intel Core i5-10310U processor using all eight cores.
+
+network <- bootnet::bootnet(
   network_data,
-  default = "mgm",
-  tuning = 0.25,
-  criterion = "EBIC",
-  rule = "OR",
-  type = rep("c", 14)
+  default = "ggmModSelect",
+  type = "case",
+  statistics = c("edge", "strength", "closeness", "betweenness"),
+  nCores = 8,
+  corMethod = "cor_auto",
+  missing = "pairwise",
+  start = "glasso",
+  nonPositiveDefinite = "continue"
 )
+```
 
-# UNTESTED: Uncomment when next sections are cleaned from psychonetrics code.
-# network <- bootnet::bootnet(
-#   single_net,
-#   nBoots = 1000,
-#   default = "mgm",
-#   tuning = 0.25,
-#   rule = "OR",
-#   missing = "listwise",
-#   criterion = "EBIC",
-#   type = "case",
-#   nCores = 8,
-#   statistics = c(
-#     "edge",
-#     "strength",
-#     "closeness",
-#     "betweenness"
-#   )
-# )
+```{r}
+#| label: fig-network-graph
+#| fig-cap: Graph of GGM modelling risk perception variables
 
-# model <- network_data %>%
-#   psychonetrics::ggm(., vars = network_labels, estimator = "FIML")  %>%
-#   psychonetrics::runmodel()
-# 
-# matrix <- psychonetrics::getmatrix(model, "omega")
-
-plot(single_net, layout = "circle", palette = "colorblind", edge.labels = TRUE)
+plot(
+  network$sample,
+  layout = "circle",
+  edge.labels = TRUE,
+  theme = "colorblind"
+)
 
 ```
 
-Since the network is dense and difficult to read, we retrieved network statistics into @tbl-network-stats below.
+We retrieved descriptive statistics for each node's vertices, as well as node-wise centrality statistics. These are shown in @tbl-network-stats below.
 
 ```{r}
 #| label: tbl-network-stats
 #| tbl-cap: Descriptive statistics of network nodes
 #| cache: true
 
-# FIX: Referencing psychonetrics model, using bootnet instead.
-# summary <- tibble(
-#   Node = model@parameters$var1[1:14],
-#   Maximum = summarise(as_tibble(matrix), across(everything(), max)) %>% unlist(., use.names=FALSE),
-#   Minimum = summarise(as_tibble(matrix), across(everything(), min)) %>% unlist(., use.names=FALSE),
-#   Mean = summarise(as_tibble(matrix), across(everything(), mean)) %>% unlist(., use.names=FALSE),
-#   SD = summarise(as_tibble(matrix), across(everything(), sd)) %>% unlist(., use.names=FALSE)
-# )
-# 
-# cent <- qgraph::centralityTable(
-#   matrix,
-#   standardized = FALSE
-# ) %>%
-#   reshape2::dcast(
-#     node ~ measure,
-#     value.var = "value"
-#   ) %>%
-#   rename(
-#     Node = "node"
-#   )
-# 
-# cent$Node <- case_match(
-#   as.integer(cent$Node),
-#   1 ~ "Weather",
-#   2 ~ "Traffic",
-#   3 ~ "Fire",
-#   4 ~ "Nuclear",
-#   5 ~ "Work", 
-#   6 ~ "Leisure",
-#   7 ~ "War",
-#   8 ~ "Environmental",
-#   9 ~ "Pandemic",
-#   10 ~ "Illness",
-#   11 ~ "Violence",
-#   12 ~ "Operational",
-#   13 ~ "Hybrid",
-#   14 ~ "Polarization"
-# )
-# 
-# summary <- left_join(summary, cent, by = "Node")
-# 
-# knitr::kable(
-#   summary,
-#   digits = 2,
-#   col.names = c("Node", "Maximum", "Minimum", "Mean", "SD", "Betweenness", "Closeness", "Strength", "Expected Influence")
-# )
+summary <- tibble(
+  Node = network$sample$labels,
+  Max = summarise(as_tibble(network$sample$graph), across(everything(), max)) %>% unlist(., use.names=FALSE),
+  Min = summarise(as_tibble(network$sample$graph), across(everything(), min)) %>% unlist(., use.names=FALSE),
+  Mean = summarise(as_tibble(network$sample$graph), across(everything(), mean)) %>% unlist(., use.names=FALSE),
+  SD = summarise(as_tibble(network$sample$graph), across(everything(), sd)) %>% unlist(., use.names=FALSE)
+)
+
+cent <- qgraph::centralityTable(network$sample$graph, standardized = FALSE) %>%
+  reshape2::dcast(
+    node ~ measure,
+    value.var = "value"
+  ) %>%
+  rename(
+    Node = "node"
+  )
+
+summary <- left_join(summary, cent, by = "Node")
+
+knitr::kable(
+  summary,
+  digits = 2,
+  col.names = c("Node", "Maximum", "Minimum", "Mean", "SD", "Betweenness", "Closeness", "Strength", "Expected Influence")
+  )
 
 ```
 
 ## Robustness checks
 
-We then attempted a robustness check by bootstrapping the network structure and retrieving Correlation Stability (CS) coefficients for each of the four measures.
+We then attempted a robustness check by retrieving Correlation Stability (CS) coefficients for each of the four centrality measures. The coefficient estimates the number of cases that could be dropped from the sample to retain a correlation between the case-dropped centrality measures and the original in 95 per cent of cases (REF TO BOOTNET). It is recommended that the CS coefficient stay over 0.25, and preferably over 0.5, for reliable centrality measures.
+
+The results are shown visually in @fig-cs-stability below, with a dashed vertical line indicating a correlation of 0.7.
+
+```{r}
+#| label: fig-cs-stability
+
+plot(network, statistics = "all") +
+  geom_hline(yintercept = 0.7, color = "grey", linetype = "dashed")
+
+```
+
+Precise values are shown in the R output below.
+
+```{r}
+#| label: cs-stability-text-output
+
+bootnet::corStability(network, cor = 0.7, statistics = "all")
+
+```
+
+The analysis shows that betweenness is too unstable to analyse, with only a 20 per cent case-drop causing the correlation with the original betweenness measure to drop below 0.7. Closeness and strength both hover around the mark of acceptable reliability, with edges being stable for up to 75 per cent case-dropping.
+
+This implies that the edges themselves are highly stable for interpretation, and ought not be affected by outliers or singular cases. Closeness and strength statistics may reliably be interpreted, although care should be taken with small differences. Betweenness, however, is unfortunately too unreliable to adequately interpret.
+
+## Network Comparisons
+
+In the manuscript, we analyse whether the network structure differs significantly between respondents who, in the past 12 months, had been in contact with emergency services personnel with regards to a hazard experience, and respondents who had not.
