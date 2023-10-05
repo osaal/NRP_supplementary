@@ -164,37 +164,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="data-preparation" class="level1 page-columns page-full">
 <h1>Data Preparation</h1>
-<div class="cell" data-hash="01_datapreparation_cache/html/01-page-setup_b648741d2155f047b83787479310b9f5">
+<div class="cell" data-hash="01_datapreparation_cache/html/01-page-setup_ff614f9f1a9f8b63b5035836a3f56e78">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"prerender.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.3     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
-This is psychonetrics 0.11! Note: this is BETA software! Please mind that the package may not be stable and report any bugs! For more information, please see psychonetrics.org, for questions and issues, please see github.com/SachaEpskamp/psychonetrics.
-
-
-Attaching package: 'psychonetrics'
-
-
-The following object is masked from 'package:graphics':
-
-    identify
-
-
-This is bootnet 1.5.5
-
-For questions and issues, please see github.com/SachaEpskamp/bootnet.</code></pre>
-</div>
 </div>
 <section id="exporting-from-spss-and-naming-conventions" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="exporting-from-spss-and-naming-conventions">Exporting from SPSS and naming conventions</h2>
@@ -204,9 +178,9 @@ For questions and issues, please see github.com/SachaEpskamp/bootnet.</code></pr
 <table class="table">
 <caption>Table&nbsp;1: Variables exported from SPSS</caption>
 <colgroup>
-<col style="width: 22%">
-<col style="width: 55%">
-<col style="width: 22%">
+<col style="width: 12%">
+<col style="width: 76%">
+<col style="width: 10%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -366,28 +340,28 @@ For questions and issues, please see github.com/SachaEpskamp/bootnet.</code></pr
 <section id="setting-up-r-environment" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-r-environment">Setting up R Environment</h2>
 <p>We initialised the R environment with the following packages:</p>
-<div class="cell" data-hash="01_datapreparation_cache/html/setup_e2ff8a298b2a063ed006d14e9a29c6a3">
+<div class="cell" data-hash="01_datapreparation_cache/html/setup_45b27ce725c71681b7ba6a1c87c1a26c">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment first</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>resetpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup directories and libraries</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"naniar"</span>, <span class="st">"psychonetrics"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment first</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>resetpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup directories and libraries</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"naniar"</span>, <span class="st">"psychonetrics"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="import-into-r-and-recoding" class="level2">
 <h2 class="anchored" data-anchor-id="import-into-r-and-recoding">Import into R and Recoding</h2>
 <p>The data were then imported into R and saved as a variable.</p>
-<div class="cell" data-hash="01_datapreparation_cache/html/setup-2_c3a1cef372f205b053734a8e43b06595">
+<div class="cell" data-hash="01_datapreparation_cache/html/setup-2_e986dd9da3423a20f67177adb1d9cdfd">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="fu">read.csv2</span>(<span class="st">"emergencyservicesattitudes2023.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="fu">read.csv2</span>(<span class="st">"emergencyservicesattitudes2023.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We changed the original coding of the fourteen risk variables to match a logical structure according to <a href="#tbl-risk-variables-recode">Table&nbsp;2</a> below.</p>
@@ -430,57 +404,57 @@ For questions and issues, please see github.com/SachaEpskamp/bootnet.</code></pr
 </tbody>
 </table>
 </div>
-<div class="cell" data-hash="01_datapreparation_cache/html/setup-3_4d68f810eb6ab038bb7af05f5f7f68c6">
+<div class="cell" data-hash="01_datapreparation_cache/html/setup-3_a349c5376dd0d91124646323ead89567">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Weather =</span> question_3_row_1,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Traffic =</span> question_3_row_2,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fire =</span> question_3_row_3,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Nuclear =</span> question_3_row_4,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Work =</span> question_3_row_5,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Leisure =</span> question_3_row_6,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">War =</span> question_3_row_7,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Environmental =</span> question_3_row_8,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pandemic =</span> question_3_row_9,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Illness =</span> question_3_row_10,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Violence =</span> question_3_row_11,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Operational =</span> question_3_row_12,</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Hybrid =</span> question_3_row_13,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Polarization =</span> question_3_row_14,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fire_Exp =</span> question_25_row_1,</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Traffic_Exp =</span> question_25_row_2,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Accident_Exp =</span> question_25_row_3,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Rescue_Exp =</span> question_25_row_4,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Leisure_Exp =</span> question_25_row_5,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Work_Exp =</span> question_25_row_6,</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">Illness_Exp =</span> question_25_row_7,</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">Inspection_Exp =</span> question_25_row_8,</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Education_Exp =</span> question_25_row_9,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Event_Exp =</span> question_25_row_10,</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Internet_Exp =</span> question_25_row_11,</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Other_Exp =</span> question_25_row_12,</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">No_Experience =</span> question_25_row_13,</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">CannotSay_Exp =</span> question_25_row_14</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>      Weather<span class="sc">:</span>Polarization,</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span><span class="fu">case_match</span>(</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        .,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Weather =</span> question_3_row_1,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Traffic =</span> question_3_row_2,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fire =</span> question_3_row_3,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Nuclear =</span> question_3_row_4,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Work =</span> question_3_row_5,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Leisure =</span> question_3_row_6,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">War =</span> question_3_row_7,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Environmental =</span> question_3_row_8,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pandemic =</span> question_3_row_9,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Illness =</span> question_3_row_10,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Violence =</span> question_3_row_11,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Operational =</span> question_3_row_12,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Hybrid =</span> question_3_row_13,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Polarization =</span> question_3_row_14,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fire_Exp =</span> question_25_row_1,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Traffic_Exp =</span> question_25_row_2,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Accident_Exp =</span> question_25_row_3,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Rescue_Exp =</span> question_25_row_4,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Leisure_Exp =</span> question_25_row_5,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Work_Exp =</span> question_25_row_6,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">Illness_Exp =</span> question_25_row_7,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">Inspection_Exp =</span> question_25_row_8,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Education_Exp =</span> question_25_row_9,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Event_Exp =</span> question_25_row_10,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Internet_Exp =</span> question_25_row_11,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Other_Exp =</span> question_25_row_12,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">No_Experience =</span> question_25_row_13,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">CannotSay_Exp =</span> question_25_row_14</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>      Weather<span class="sc">:</span>Polarization,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span><span class="fu">case_match</span>(</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        .,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We did not change the risk experience variables’ coding scheme, as it was already suitable for analysis. Risk experiences were coded either as <code>0</code> (not selected, i.e., “no”) or <code>1</code> (selected, i.e., “yes”).</p>
@@ -494,30 +468,30 @@ For questions and issues, please see github.com/SachaEpskamp/bootnet.</code></pr
 <li>Choosing “No” or “Cannot say” was exclusive to all other responses.</li>
 </ul>
 <p>The dataset measured self-reported contact experiences in multiple scenarios, seven of which were hazard-related: a fire, a traffic accident, a generic accident, a rescue-related event, a leisure-time accident, a work accident or an illness. Each variable was measured as a dichotomy, with <code>1</code> indicating an experience and <code>0</code> indicating a lack of experience. We first constructed a sum variable measuring <em>overall hazard experience</em>. However, a tabulation of the responses showed very low occurrence rates of more than one experience, so we opted to dichotomise the variable into having had no experiences or having had at least one experience. The cross-tabulation in <strong>?@tbl-hazard-experience-crosstab</strong> shows the results of the dichotomisation, in counts.</p>
-<div class="cell" data-hash="01_datapreparation_cache/html/setup-4_4c82e3b313c92a6b54c1dbe7612a4db2">
+<div class="cell" data-hash="01_datapreparation_cache/html/setup-4_8c6cc0c0298ba3fac91341cfeb05ea6c">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Constructing the experience group</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>exp.variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Fire_Exp"</span>, <span class="st">"Traffic_Exp"</span>, <span class="st">"Accident_Exp"</span>, <span class="st">"Rescue_Exp"</span>, <span class="st">"Leisure_Exp"</span>, <span class="st">"Work_Exp"</span>, <span class="st">"Illness_Exp"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>experience <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data[, exp.variables]) <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(., <span class="at">Experience.Dichotomy =</span> <span class="st">"."</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind experience to main dataset</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_cols</span>(data, experience)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Constructing the experience group</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>exp.variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Fire_Exp"</span>, <span class="st">"Traffic_Exp"</span>, <span class="st">"Accident_Exp"</span>, <span class="st">"Rescue_Exp"</span>, <span class="st">"Leisure_Exp"</span>, <span class="st">"Work_Exp"</span>, <span class="st">"Illness_Exp"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>experience <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data[, exp.variables]) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(., <span class="at">Experience.Dichotomy =</span> <span class="st">"."</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind experience to main dataset</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_cols</span>(data, experience)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>crosstab.comp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">3055</span>, <span class="at">ncol =</span> <span class="dv">2</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>exp.quantitative <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data[, exp.variables]) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>crosstab.comp<span class="sc">$</span>X1 <span class="ot">&lt;-</span> exp.quantitative<span class="sc">$</span>.</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>crosstab.comp<span class="sc">$</span>X2 <span class="ot">&lt;-</span> experience<span class="sc">$</span>Experience.Dichotomy</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(<span class="fu">table</span>(crosstab.comp<span class="sc">$</span>X1, crosstab.comp<span class="sc">$</span>X2, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Quantitative"</span>, <span class="st">"Dichotomous"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>crosstab.comp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">3055</span>, <span class="at">ncol =</span> <span class="dv">2</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>exp.quantitative <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data[, exp.variables]) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>crosstab.comp<span class="sc">$</span>X1 <span class="ot">&lt;-</span> exp.quantitative<span class="sc">$</span>.</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>crosstab.comp<span class="sc">$</span>X2 <span class="ot">&lt;-</span> experience<span class="sc">$</span>Experience.Dichotomy</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(<span class="fu">table</span>(crosstab.comp<span class="sc">$</span>X1, crosstab.comp<span class="sc">$</span>X2, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Quantitative"</span>, <span class="st">"Dichotomous"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-hazard-experience-crosstab" class="cell tbl-parent quarto-layout-panel anchored" data-hash="01_datapreparation_cache/html/tbl-hazard-experience-crosstab_43c93d46a93775f9b02e775c7e378c5a">
+<div id="tbl-hazard-experience-crosstab" class="cell tbl-parent quarto-layout-panel anchored" data-hash="01_datapreparation_cache/html/tbl-hazard-experience-crosstab_30212cbf3a18523337888fd42c39dcd3">
 <div class="panel-caption table-caption">
 <p><strong>?(caption)</strong></p>
 </div>
@@ -542,10 +516,10 @@ Quantitative
 <section id="checking-correctness-of-data" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="checking-correctness-of-data">Checking Correctness of Data</h2>
 <p>We then proceeded to check that all data had been correctly entered and modified. The results are in <a href="#tbl-data-summary">Table&nbsp;3</a> (the table is very wide!).</p>
-<div class="cell page-columns page-full" data-hash="01_datapreparation_cache/html/tbl-data-summary_1b76cf2225c804151251c0f78f29ff5b">
+<div class="cell page-columns page-full" data-hash="01_datapreparation_cache/html/tbl-data-summary_ef4c5a7f4934bc3159f31a5408bce3b3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(data, <span class="at">digits =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(data, <span class="at">digits =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display column-screen">
 <div id="tbl-data-summary" class="anchored">

@@ -88,7 +88,48 @@ knitr::kable(
 
 ```
 
-## Robustness checks
+The output of the `bootnet::print` function is presented below.
+
+```{r}
+#| label: network-summary
+
+print(network)
+print(paste0(
+  "Number of positive ties: ",
+  sum(network$sample$graph[lower.tri(network$sample$graph)] > 0)
+))
+print(paste0(
+  "Number of negative ties: ",
+  sum(network$sample$graph[lower.tri(network$sample$graph)] < 0)
+))
+print(paste0(
+  "Number of absolute ties between 0 and 0.2 (exclusive): ",
+  sum(network$sample$graph[lower.tri(network$sample$graph)] > 0 & network$sample$graph[lower.tri(network$sample$graph)] < 0.2)
+))
+```
+
+The flow diagram for the Hybrid node is generated below.
+
+```{r}
+#| label: fig-hybrid-flow-diagram
+#| fig-cap: Flow diagram of the Hybrid node.
+
+plot(qgraph::flow(network$sample$graph, from = 13, theme = "colorblind"))
+```
+
+## Network Characteristics
+
+FIGURE X below shows the strength, closeness, and betweenness centrality measures of the estimated network nodes.
+
+```{r}
+#| label: fig-centrality
+#| fig-cap: Centrality measures of estimated network.
+
+qgraph::centralityPlot(network$sample$graph, scale = "z-scores", include = c("Strength", "Closeness", "Betweenness"))
+
+```
+
+## Robustness Checks
 
 We then attempted a robustness check by retrieving Correlation Stability (CS) coefficients for each of the four centrality measures. The coefficient estimates the number of cases that could be dropped from the sample to retain a correlation between the case-dropped centrality measures and the original in 95 per cent of cases (REF TO BOOTNET). It is recommended that the CS coefficient stay over 0.25, and preferably over 0.5, for reliable centrality measures.
 
@@ -118,3 +159,69 @@ This implies that the edges themselves are highly stable for interpretation, and
 ## Network Comparisons
 
 In the manuscript, we analyse whether the network structure differs significantly between respondents who, in the past 12 months, had been in contact with emergency services personnel with regards to a hazard experience, and respondents who had not.
+
+We started by estimating two models on the two groups separately, using the same algorithm and correlation methods as for the full sample model.
+
+```{r}
+#| label: subgroup-networks
+
+exp.0.network <- data %>%
+  dplyr::filter(Experience.Dichotomy == 0) %>%
+  dplyr::select(Weather:Polarization) %>%
+  bootnet::estimateNetwork(
+    .,
+    default = "ggmModSelect",
+    corMethod = "cor_auto",
+    missing = "pairwise",
+    nonPositiveDefinite = "continue"
+  )
+exp.1.network <- data %>%
+  dplyr::filter(Experience.Dichotomy == 1) %>%
+  dplyr::select(Weather:Polarization) %>%
+  bootnet::estimateNetwork(
+    .,
+    default = "ggmModSelect",
+    corMethod = "cor_auto",
+    missing = "pairwise",
+    nonPositiveDefinite = "continue"
+  )
+
+```
+
+```{r}
+#| label: fig-subgroup-networks
+#| fig-cap: Network models of risk perception, grouped by whether respondents had been in contact with emergency services personnel in a hazard-related event in the past twelve months (titled "experience").
+#| layout-ncol: 2
+#| fig-subcap: 
+#| - No experience (N = ...)
+#| - Experience (N = ...)
+
+plot(exp.0.network, layout = "circle", theme = "colorblind", edge.labels = TRUE)
+plot(exp.1.network, layout = "circle", theme = "colorblind", edge.labels = TRUE)
+
+```
+
+We then conducted the network comparison test from the `NetworkComparisonTest` package for the two subgroup networks.
+
+```{r}
+#| label: nct-results
+#| cache: true
+
+# The test is computationally intensive. On an Intel Core i5-10310U processor, the test took around 1.5 hours to run.
+# NB: GitHUb user pinusm has developed a fork of NCT that enables multi-core processing (github.com/pinusm/NetworkComparisonTest, commit a56712e). This fork does not seem to differ substantially from the current master version (github.com/cvborkulo/NetworkComparisonTest, commit f05b102), so it could be used to speed up the current analysis markedly.
+
+NetworkComparisonTest::NCT(
+  exp.0.network,
+  exp.1.network,
+  abs = TRUE,  # We test absolute values of edge connections.
+  it = 1000,
+  test.edges = TRUE,
+  edges = list(
+    c("Traffic", "Fire"),
+    c("Hybrid", "Polarization"),
+    c("Nuclear", "Pandemic")
+    ),
+  progressbar = FALSE
+  )
+
+```

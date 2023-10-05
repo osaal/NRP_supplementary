@@ -13,7 +13,7 @@ The data were collected by a third party and given to the researchers as an SPSS
 @tbl-spss-exported-variables shows the collected variables with original questions and short-hand names.
 
 | Exported name      | Survey question                                                                                                          | Short-hand name |
-|----------------|----------------------------------------|----------------|
+|--------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------|
 | question_3_row_1   | Extreme weather phenomena (flood, drought, storm etc.)                                                                   | Weather         |
 | question_3_row_2   | Traffic accident                                                                                                         | Traffic         |
 | question_3_row_3   | Fire                                                                                                                     | Fire            |
