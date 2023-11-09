@@ -7,13 +7,15 @@ source("prerender.R")
 
 ```
 
-We chose to model a Gaussian graphical model (GGM) using the `ggmModSelect` model search algorithm (Foygel & Drton, 2010; Epskamp et al., 2012). The algorithm uses a starting point selected with graphical least absolute shrinkage and selection operator (GLASSO) regression, after which it searches the model space by minimising the Bayesian Information Criterion (BIC; see Blanken, Isvoranu & Epskamp, 2021: pp. 118-120).
+We chose to model a Gaussian graphical model (GGM) using the `ggmModSelect` model search algorithm (Foygel & Drton 2010; Epskamp et al. 2012). The algorithm uses a starting point selected with graphical least absolute shrinkage and selection operator (GLASSO) regression, after which it searches the model space by minimising the Bayesian Information Criterion (BIC; see Blanken, Isvoranu & Epskamp 2021, 118-120).
 
-The algorithm has been shown to present high sensitivity (true positive detection rate) and specificity (true negative detection rate), with the main drawback being a slow calculation time (Blanken, Isvoranu & Epskamp, 2021: pp. 118-120). However, simulation studies have shown that, at lower sample sizes (e.g., N = 300), sensitivity suffers a drop and the graphical model becomes more difficult to interpret (Blanken, Isvoranu & Epskamp, 2021: p. 125; Isvoranu & Epskamp, 2021). Even though regularization methods may be more preferable at lower sample sizes, we opt to use the same modelling algorithm for both the main network model and the later comparative models, to ensure the validity of comparing models across analyses.
+The algorithm has been shown to present high sensitivity (true positive detection rate) and specificity (true negative detection rate), with the main drawback being a slow calculation time (Blanken, Isvoranu & Epskamp 2021, 118-120). However, simulation studies have shown that, at lower sample sizes (e.g., N = 300), sensitivity suffers a drop and the graphical model becomes more difficult to interpret (Blanken, Isvoranu & Epskamp 2021, 125; Isvoranu & Epskamp 2021). Even though regularization methods may be more preferable at lower sample sizes, we opt to use the same modelling algorithm for both the main network model and the later comparative models, to ensure the validity of comparing models across analyses.
 
-Because our risk perception variables are ordered categorical data, we implement the `ggmModSelect` algorithm using polychoric correlations - a method that attempts to estimate an underlying continuity beneath Likert-type measurements (Olsson, 1979; Epskamp & Fried, 2018). This method may be more unstable for low sample sizes as well as lead to conservative estimates (Blanken, Isvoranu & Epskamp, 2021: pp. 126-127).
+Because our risk perception variables are ordered categorical data, we implement the `ggmModSelect` algorithm using polychoric correlations - a method that attempts to estimate an underlying continuity beneath Likert-type measurements (Olsson 1979; Epskamp & Fried 2018). This method may be more unstable for low sample sizes as well as lead to conservative estimates (Blanken, Isvoranu & Epskamp 2021, 126-127).
 
-We handled missing data using pair-wise removal, as a more appropriate missing data procedure (e.g., full information maximum likelihood) is not implemented for ordinal data.
+We handled missing data using pairwise removal, as a more appropriate missing data procedure (e.g., full information maximum likelihood) is not implemented for ordinal data.
+
+We used the `bootnet` package (Epskamp, Borsboom & Fried 2018) for network estimation and correlation stability measures; the `qgraph` package (Epskamp et al. 2012) for centrality estimates and graphing; the `tidyverse` collection (see Wickham 2014) for data wrangling and clean-up; and the `NetworkComparisonTest` package (van Borkulo et al. 2022) for comparing group-wise network structures. We also used the `knitr` package (Xie 2016) in the production of this online document.
 
 The plotted network is shown in @fig-network-graph.
 
@@ -53,6 +55,8 @@ plot(
 )
 
 ```
+
+This figure corresponds to **Figure 2** in the published manuscript.
 
 We retrieved descriptive statistics for each node's vertices, as well as node-wise centrality statistics. These are shown in @tbl-network-stats below.
 
@@ -108,18 +112,18 @@ print(paste0(
 ))
 ```
 
-The flow diagram for the Hybrid node is generated below.
+The flow diagram for the Leisure node is generated below, and corresponds to **Figure 3** in the published manuscript.
 
 ```{r}
 #| label: fig-hybrid-flow-diagram
 #| fig-cap: Flow diagram of the Hybrid node.
 
-plot(qgraph::flow(network$sample$graph, from = 13, theme = "colorblind"))
+plot(qgraph::flow(network$sample$graph, from = 6, theme = "colorblind"))
 ```
 
 ## Network Characteristics
 
-FIGURE X below shows the strength, closeness, and betweenness centrality measures of the estimated network nodes.
+@fig-centrality shows the strength, closeness, and betweenness centrality measures of the estimated network nodes.
 
 ```{r}
 #| label: fig-centrality
@@ -129,9 +133,11 @@ qgraph::centralityPlot(network$sample$graph, scale = "z-scores", include = c("St
 
 ```
 
+This figure corresponds to **Figure 4** in the published manuscript.
+
 ## Robustness Checks
 
-We then attempted a robustness check by retrieving Correlation Stability (CS) coefficients for each of the four centrality measures. The coefficient estimates the number of cases that could be dropped from the sample to retain a correlation between the case-dropped centrality measures and the original in 95 per cent of cases (REF TO BOOTNET). It is recommended that the CS coefficient stay over 0.25, and preferably over 0.5, for reliable centrality measures.
+We then attempted a robustness check by retrieving Correlation Stability (CS) coefficients for each of the four centrality measures. The coefficient estimates the number of cases that could be dropped from the sample to retain a correlation between the case-dropped centrality measures and the original in 95 per cent of cases (Epskamp, Borsboom & Fried 2018). It is recommended that the CS coefficient stay over 0.25, and preferably over 0.5, for reliable centrality measures.
 
 The results are shown visually in @fig-cs-stability below, with a dashed vertical line indicating a correlation of 0.7.
 
@@ -201,7 +207,9 @@ plot(exp.1.network, layout = "circle", theme = "colorblind", edge.labels = TRUE)
 
 ```
 
-We then conducted the network comparison test from the `NetworkComparisonTest` package for the two subgroup networks.
+These figures correspond to **Figures 5 and 6**, respectively, in the published manuscript.
+
+We then conducted the network comparison test from the `NetworkComparisonTest` package (van Borkulo et al. 2022) for the two subgroup networks.
 
 ```{r}
 #| label: nct-results
@@ -225,3 +233,5 @@ NetworkComparisonTest::NCT(
   )
 
 ```
+
+The statistics from this test are presented in the published manuscript in **Table 2**.

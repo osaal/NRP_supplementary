@@ -1,0 +1,23 @@
+# References {#sec-references}
+
+*Please note, that the reference list for this online technical supplement differs from that of the manuscript.*
+
+Blanken, Tessa, F., Isvoranu, Adela-Marie and Epskamp, Sacha. (2021). "Estimating Network Structures using Model Selection". In Isvoranu, Adela-Marie, Epskamp, Sacha, Waldorp, Lourens, J. and Borsboom, Denny. (eds.) *Network Psychometrics with R: A Guide for Behavioral and Social Scientists*, 111-132. Oxon: Routledge.
+
+van Borkulo, Claudia, D., van Bork, Riet, Boschloo, Lynn, Kossakowski, Jolanda, J., Tio, Pia, Schoevers, Robert, A., Borsboom, Denny and Waldorp, Lourens, J. (2022). Comparing network structures on three aspects: A permutation test. *Psychological Methods* 11 Apr 2022. https://doi.org/10.1037/met0000476
+
+Epskamp, Sacha, Cramer, Angelique, O., J., Waldorp, Lourens, J., Schmittmann, Verena, D. and Borsboom, Denny. (2012). qgraph: Network Visualizations of Relationships in Psychometric Data. *Journal of Statistical Software* 48(4), 1-18. https://doi.org/10.18637/jss.v048.i04
+
+Epskamp, Sacha and Fried, Eiko, I. (2018). A tutorial on regularized partial correlation networks. *Psychological Methods* 23(4), 617-634. https://doi.org/10.1037/met0000167
+
+Epskamp, Sacha, Borsboom, Denny and Fried, Eiko, I. (2018). Estimating psychological networks and their accuracy: A tutorial paper. *Behavior Research Methods* 50(1), 195-212. https://doi.org/10.3758/s13428-017-0862-1
+
+Foygel, Rina and Drton, Mathias. (2010). Extended Bayesian Information Criteria for Gaussian Graphical Models. *Advances in Neural Information Processing Systems* 23(NIPS 2010), 604-612. https://proceedings.neurips.cc/paper_files/paper/2010/file/072b030ba126b2f4b2374f342be9ed44-Paper.pdf
+
+Isvoranu, Adela-Marie and Epskamp, Sacha. (2021). "Constructing and Drawing Networks in qgraph". In Isvoranu, Adela-Marie, Epskamp, Sacha, Waldorp, Lourens, J. and Borsboom, Denny. (eds.) *Network Psychometrics with R: A Guide for Behavioral and Social Scientists*, XXX-YYY. Oxon: Routledge.
+
+Olsson, Ulf. (1979). Maximum likelihood estimation of the polychoric correlation coefficient. *Psychometrika* 44(1979), 443-460.
+
+Wickham, Hadley. (2014). Tidy Data. *Journal of Statistical Software* 59(10), 1-23. https://doi.org/10.18637/jss.v059.i10
+
+Xie, Yihui. (2016). Knitr: A General-Purpose Package for Dynamic Report Generation in r. https://yihui.org/knitr/

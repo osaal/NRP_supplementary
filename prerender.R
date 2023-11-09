@@ -7,7 +7,14 @@ set.seed(12345)
 
 # Setup directories and libraries
 packages <- c(
-  "tidyverse", "naniar", "psychonetrics", "bootnet"
+  "tidyverse",
+  "naniar",
+  "psychonetrics",
+  "bootnet",
+  "qgraph",
+  "reshape2",
+  "knitr",
+  "NetworkComparisonTest"
 )
 lapply(packages, library, character.only = TRUE)
 

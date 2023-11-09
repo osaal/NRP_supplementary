@@ -13,7 +13,7 @@ The data were collected by a third party and given to the researchers as an SPSS
 @tbl-spss-exported-variables shows the collected variables with original questions and short-hand names.
 
 | Exported name      | Survey question                                                                                                          | Short-hand name |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------|
+|------------|------------------------------------------------|------------|
 | question_3_row_1   | Extreme weather phenomena (flood, drought, storm etc.)                                                                   | Weather         |
 | question_3_row_2   | Traffic accident                                                                                                         | Traffic         |
 | question_3_row_3   | Fire                                                                                                                     | Fire            |
@@ -67,12 +67,24 @@ We initialised the R environment with the following packages:
 rm(list=ls())
 resetpar <- par(no.readonly = TRUE)
 
+# Set seed for bootstrapping reproduction
+set.seed(12345)
+
 # Setup directories and libraries
 packages <- c(
-  "tidyverse", "naniar", "psychonetrics"
+  "tidyverse",
+  "naniar",
+  "psychonetrics",
+  "bootnet",
+  "qgraph",
+  "reshape2",
+  "knitr",
+  "NetworkComparisonTest"
 )
 lapply(packages, library, character.only = TRUE)
 ```
+
+This section of code is produced in the `prerender.R` source file, under rows `1-19`.
 
 ## Import into R and Recoding
 
@@ -81,8 +93,12 @@ The data were then imported into R and saved as a variable.
 ```{r}
 #| label: setup-2
 #| eval: false
+
+# Load data
 data <- tibble(read.csv2("emergencyservicesattitudes2023.csv"))
 ```
+
+This section of code is located in the `prerender.R` source file on rows `21-22`. Please note, that the dataset cannot be made publicly available due to respondent privacy and a lack of publication consent upon data collection.
 
 We changed the original coding of the fourteen risk variables to match a logical structure according to @tbl-risk-variables-recode below.
 
@@ -99,6 +115,8 @@ We changed the original coding of the fourteen risk variables to match a logical
 ```{r}
 #| label: setup-3
 #| eval: false
+
+# Rename variables
 data <- data %>%
   dplyr::rename(
     Weather = question_3_row_1,
@@ -131,6 +149,7 @@ data <- data %>%
     CannotSay_Exp = question_25_row_14
   )
 
+# Recode risk perception variables
 data <- data %>%
   dplyr::mutate(
     across(
@@ -145,16 +164,19 @@ data <- data %>%
     )
   )
 
+# Assign missing values
 data <- data %>%
   naniar::replace_with_na_all(., condition = ~.x == 5)
 ```
+
+This section is located on rows `25-75` in the source file `prerender.R`.
 
 We did not change the risk experience variables' coding scheme, as it was already suitable for analysis. Risk experiences were coded either as `0` (not selected, i.e., "no") or `1` (selected, i.e., "yes").
 
 Risk experiences were originally piped in the survey in the following way:
 
 -   The question was a multiple-choice question, with no restrictions on how many choices the respondent made (except for the ones below).
--   If a respondent chose any of the twelve first experiences (question_25_row_1 to question_25_row_12), the final two choices were greyed out and unavailable.
+-   If a respondent chose any of the twelve first experiences (`question_25_row_1` to `question_25_row_12`), the final two choices were greyed out and unavailable.
 -   If a respondent chose "I have not been engaged with emergency services personnel", all other choices became unavailable.
 -   If a respondent chose "I cannot say", all other choices became unavailable.
 -   Thus, the maximum choices were twelve unique emergency services personnel contact experiences.
@@ -176,6 +198,8 @@ experience <- rowSums(data[, exp.variables]) %>%
 # Bind experience to main dataset
 data <- dplyr::bind_cols(data, experience)
 ```
+
+This code section is found on rows `77-85` in the `prerender.R` source file.
 
 ```{r}
 #| label: tbl-hazard-experience-crosstab
@@ -199,5 +223,7 @@ We then proceeded to check that all data had been correctly entered and modified
 #| column: screen
 knitr::kable(summary(data, digits = 2))
 ```
+
+This table corresponds to **Table 1** in the published manuscript.
 
 The original data set had no missing values on any variable. Since there are missing values on the fourteen risk perception variables, we conclude that the conversion is correct. There are no missing values on the experience variables, which is to be expected, as the lack of response to one variable was coded as `0` ("no").
