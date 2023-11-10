@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./sessioninformation.html" rel="" target="" aria-current="page">
  <span class="menu-text">Session Information</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./03_references.html" rel="" target="">
+ <span class="menu-text">References</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -162,10 +166,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="session-information" class="level1">
 <h1>Session Information</h1>
-<p>Session information updated 2.10.2023.</p>
+<p>Session information updated 9.11.2023.</p>
 <section id="basic-session-information" class="level2">
 <h2 class="anchored" data-anchor-id="basic-session-information">Basic Session Information</h2>
-<div class="cell">
+<div class="cell" data-hash="sessioninformation_cache/html/session-info_23ce73bf88bbc0c08d900d7fdf9a85f0">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sesh_info <span class="ot">&lt;-</span> <span class="fu">sessionInfo</span>()</span>
@@ -202,10 +206,10 @@ attached base packages:
 [1] stats     graphics  grDevices datasets  utils     methods   base     
 
 loaded via a namespace (and not attached):
- [1] compiler_4.3.1    fastmap_1.1.1     cli_3.6.1         htmltools_0.5.6  
- [5] tools_4.3.1       rstudioapi_0.15.0 yaml_2.3.7        rmarkdown_2.24   
- [9] knitr_1.43        jsonlite_1.8.7    xfun_0.40         digest_0.6.33    
-[13] rlang_1.1.1       renv_1.0.2        evaluate_0.21    </code></pre>
+ [1] htmlwidgets_1.6.2 compiler_4.3.1    fastmap_1.1.1     cli_3.6.1        
+ [5] htmltools_0.5.6   tools_4.3.1       rstudioapi_0.15.0 yaml_2.3.7       
+ [9] rmarkdown_2.24    knitr_1.43        jsonlite_1.8.7    xfun_0.40        
+[13] digest_0.6.33     rlang_1.1.1       renv_1.0.2        evaluate_0.21    </code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -264,7 +268,7 @@ $quarto
 </section>
 <section id="diagnostics-for-renv" class="level2">
 <h2 class="anchored" data-anchor-id="diagnostics-for-renv">Diagnostics for <code>renv</code></h2>
-<div class="cell">
+<div class="cell" data-hash="sessioninformation_cache/html/renv-info_a92bbb649542d66d92464b60b8552e3a">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">diagnostics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -293,196 +297,273 @@ attached base packages:
 [1] stats     graphics  grDevices datasets  utils     methods   base     
 
 loaded via a namespace (and not attached):
- [1] digest_0.6.33     later_1.3.1       fastmap_1.1.1     xfun_0.40        
- [5] knitr_1.43        htmltools_0.5.6   rmarkdown_2.24    ps_1.7.5         
- [9] cli_3.6.1         processx_3.8.2    renv_1.0.2        compiler_4.3.1   
-[13] rstudioapi_0.15.0 tools_4.3.1       quarto_1.3        evaluate_0.21    
-[17] Rcpp_1.0.11       yaml_2.3.7        rlang_1.1.1       jsonlite_1.8.7   
+ [1] digest_0.6.33     later_1.3.1       codetools_0.2-19  fastmap_1.1.1    
+ [5] xfun_0.40         knitr_1.43        htmltools_0.5.6   rmarkdown_2.24   
+ [9] ps_1.7.5          cli_3.6.1         processx_3.8.2    renv_1.0.2       
+[13] compiler_4.3.1    rstudioapi_0.15.0 tools_4.3.1       quarto_1.3       
+[17] evaluate_0.21     Rcpp_1.0.11       yaml_2.3.7        rlang_1.1.1      
+[21] jsonlite_1.8.7    htmlwidgets_1.6.2
 
 # Project --------------------------------------------------------------------
-Project path: "~/Documents/RProjects/NRP_supplementary"
+Project path: "~/RProjects/NRP_supplementary"
 
 # Status ---------------------------------------------------------------------
-No issues found -- the project is in a consistent state.
+The following package(s) are in an inconsistent state:
+
+ package               installed recorded used
+ NetworkComparisonTest y         n        y   
+
+See ?renv::status() for advice on resolving these issues.
 
 # Packages -------------------------------------------------------------------
-                 Library Source Lockfile Source Path Dependency
-DBI                1.1.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-GGally             2.1.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-KernSmooth       2.23-21   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-MASS              7.3-60   CRAN   7.3-60   CRAN  [2]   indirect
-Matrix           1.5-4.1   CRAN  1.5-4.1   CRAN  [2]   indirect
-R6                 2.5.1   RSPM    2.5.1   RSPM  [1]   indirect
-RColorBrewer       1.1-3   RSPM    1.1-3   RSPM  [1]   indirect
-Rcpp              1.0.11   RSPM   1.0.11   RSPM  [1]   indirect
-RcppEigen      0.3.3.9.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-UpSetR             1.4.0   RSPM    1.4.0   RSPM  [1]   indirect
-askpass            1.2.0   RSPM    1.2.0   RSPM  [1]   indirect
-backports          1.4.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-base64enc          0.1-3   RSPM    0.1-3   RSPM  [1]   indirect
-bdsmatrix          1.3-6   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-bit                4.0.5   RSPM    4.0.5   RSPM  [1]   indirect
-bit64              4.0.5   RSPM    4.0.5   RSPM  [1]   indirect
-blob               1.2.4   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-boot            1.3-28.1   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-brio               1.1.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-broom              1.0.5   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-bslib              0.5.1   RSPM    0.5.1   RSPM  [1]   indirect
-cachem             1.0.8   RSPM    1.0.8   RSPM  [1]   indirect
-callr              3.7.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-cellranger         1.1.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-class             7.3-22   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-cli                3.6.1   RSPM    3.6.1   RSPM  [1]   indirect
-clipr              0.8.0   RSPM    0.8.0   RSPM  [1]   indirect
-cluster            2.1.4   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-codetools         0.2-19   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-colorspace         2.1-0   RSPM    2.1-0   RSPM  [1]   indirect
-conflicted         1.2.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-cpp11              0.4.6   RSPM    0.4.6   RSPM  [1]   indirect
-crayon             1.5.2   RSPM    1.5.2   RSPM  [1]   indirect
-credentials        2.0.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-curl               5.0.2   RSPM    5.0.2   RSPM  [1]   indirect
-data.table        1.14.8   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-dbplyr             2.3.4   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-desc               1.4.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-diffobj            0.3.5   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-digest            0.6.33   RSPM   0.6.33   RSPM  [1]   indirect
-dplyr              1.1.3   RSPM    1.1.3   RSPM  [1]     direct
-dtplyr             1.3.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-ellipsis           0.3.2   RSPM    0.3.2   RSPM  [1]   indirect
-evaluate            0.21   RSPM     0.21   RSPM  [1]   indirect
-fansi              1.0.4   RSPM    1.0.4   RSPM  [1]   indirect
-farver             2.1.1   RSPM    2.1.1   RSPM  [1]   indirect
-fastmap            1.1.1   RSPM    1.1.1   RSPM  [1]   indirect
-finalfit           1.0.6   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-fontawesome        0.5.1   RSPM    0.5.1   RSPM  [1]   indirect
-forcats            1.0.0   RSPM    1.0.0   RSPM  [1]   indirect
-foreach            1.5.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-foreign           0.8-84   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-fs                 1.6.3   RSPM    1.6.3   RSPM  [1]   indirect
-gargle             1.5.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-generics           0.1.3   RSPM    0.1.3   RSPM  [1]   indirect
-gert               2.0.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-ggplot2            3.4.3   RSPM    3.4.3   RSPM  [1]   indirect
-gh                 1.4.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-gitcreds           0.1.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-glmnet             4.1-8   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-glue               1.6.2   RSPM    1.6.2   RSPM  [1]   indirect
-googledrive        2.1.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-googlesheets4      1.1.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-grDevices           &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-graphics            &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-grid                &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-gridExtra            2.3   RSPM      2.3   RSPM  [1]   indirect
-gtable             0.3.4   RSPM    0.3.4   RSPM  [1]   indirect
-haven              2.5.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-highr               0.10   RSPM     0.10   RSPM  [1]   indirect
-hms                1.1.3   RSPM    1.1.3   RSPM  [1]   indirect
-htmltools          0.5.6   RSPM    0.5.6   RSPM  [1]   indirect
-httr               1.4.7   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-httr2              0.2.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-ids                1.0.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-ini                0.3.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-isoband            0.2.7   RSPM    0.2.7   RSPM  [1]   indirect
-iterators         1.0.14   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-jomo               2.7-6   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-jquerylib          0.1.4   RSPM    0.1.4   RSPM  [1]   indirect
-jsonlite           1.8.7   RSPM    1.8.7   RSPM  [1]   indirect
-knitr               1.43   RSPM     1.43   RSPM  [1]     direct
-labeling           0.4.3   RSPM    0.4.3   RSPM  [1]   indirect
-later              1.3.1   RSPM    1.3.1   RSPM  [1]   indirect
-lattice           0.21-8   CRAN   0.21-8   CRAN  [2]   indirect
-lifecycle          1.0.3   RSPM    1.0.3   RSPM  [1]   indirect
-lme4              1.1-34   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-lubridate          1.9.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-magrittr           2.0.3   RSPM    2.0.3   RSPM  [1]   indirect
-memoise            2.0.1   RSPM    2.0.1   RSPM  [1]   indirect
-methods             &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-mgcv              1.8-42   CRAN   1.8-42   CRAN  [2]   indirect
-mice              3.16.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-mime                0.12   RSPM     0.12   RSPM  [1]   indirect
-minqa              1.2.6   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-mitml              0.4-5   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-modelr            0.1.11   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-munsell            0.5.0   RSPM    0.5.0   RSPM  [1]   indirect
-naniar             1.0.0   RSPM    1.0.0   RSPM  [1]     direct
-nlme             3.1-162   CRAN  3.1-162   CRAN  [2]   indirect
-nloptr             2.0.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-nnet              7.3-19   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-norm            1.0-11.1   RSPM 1.0-11.1   RSPM  [1]   indirect
-numDeriv      2016.8-1.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-openssl            2.1.1   RSPM    2.1.1   RSPM  [1]   indirect
-ordinal       2022.11-16   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-pROC              1.18.4   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-packrat            0.9.2   RSPM    0.9.2   RSPM  [1]   indirect
-pan                  1.9   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-pillar             1.9.0   RSPM    1.9.0   RSPM  [1]   indirect
-pkgbuild           1.4.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-pkgconfig          2.0.3   RSPM    2.0.3   RSPM  [1]   indirect
-pkgload            1.3.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-plyr               1.8.8   RSPM    1.8.8   RSPM  [1]   indirect
-praise             1.0.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-prettyunits        1.2.0   RSPM    1.2.0   RSPM  [1]   indirect
-processx           3.8.2   RSPM    3.8.2   RSPM  [1]   indirect
-progress           1.2.2   RSPM    1.2.2   RSPM  [1]   indirect
-ps                 1.7.5   RSPM    1.7.5   RSPM  [1]   indirect
-purrr              1.0.2   RSPM    1.0.2   RSPM  [1]   indirect
-quarto               1.3   RSPM      1.3   RSPM  [1]     direct
-ragg               1.2.5   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-rappdirs           0.3.3   RSPM    0.3.3   RSPM  [1]   indirect
-readr              2.1.4   RSPM    2.1.4   RSPM  [1]   indirect
-readxl             1.4.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-rematch            2.0.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-rematch2           2.1.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-renv               1.0.2   RSPM    1.0.2   RSPM  [1]     direct
-reprex             2.0.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-reshape            0.8.9   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-rlang              1.1.1   RSPM    1.1.1   RSPM  [1]   indirect
-rmarkdown           2.24   RSPM     2.24   RSPM  [1]     direct
-rpart             4.1.19   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-rprojroot          2.0.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-rsconnect          1.1.0   RSPM    1.1.0   RSPM  [1]   indirect
-rstudioapi        0.15.0   RSPM   0.15.0   RSPM  [1]   indirect
-rvest              1.0.3   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-sass               0.4.7   RSPM    0.4.7   RSPM  [1]   indirect
-scales             1.2.1   RSPM    1.2.1   RSPM  [1]   indirect
-selectr            0.4-2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-shape              1.4.6   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-spatial           7.3-16   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-splines             &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-stats               &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-stringi           1.7.12   RSPM   1.7.12   RSPM  [1]   indirect
-stringr            1.5.0   RSPM    1.5.0   RSPM  [1]   indirect
-survival           3.5-5   CRAN     &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
-sys                3.4.2   RSPM    3.4.2   RSPM  [1]   indirect
-systemfonts        1.0.4   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-testthat          3.1.10   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-textshaping        0.3.6   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-tibble             3.2.1   RSPM    3.2.1   RSPM  [1]   indirect
-tidyr              1.3.0   RSPM    1.3.0   RSPM  [1]   indirect
-tidyselect         1.2.0   RSPM    1.2.0   RSPM  [1]   indirect
-tidyverse          2.0.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-timechange         0.2.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-tinytex             0.46   RSPM     0.46   RSPM  [1]   indirect
-tools               &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-tzdb               0.4.0   RSPM    0.4.0   RSPM  [1]   indirect
-ucminf             1.2.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-usethis            2.2.2   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-utf8               1.2.3   RSPM    1.2.3   RSPM  [1]   indirect
-utils               &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
-uuid               1.1-1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-vctrs              0.6.3   RSPM    0.6.3   RSPM  [1]   indirect
-viridis            0.6.4   RSPM    0.6.4   RSPM  [1]   indirect
-viridisLite        0.4.2   RSPM    0.4.2   RSPM  [1]   indirect
-visdat             0.6.0   RSPM    0.6.0   RSPM  [1]   indirect
-vroom              1.6.3   RSPM    1.6.3   RSPM  [1]   indirect
-waldo              0.5.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-whisker            0.4.1   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-withr              2.5.1   RSPM    2.5.1   RSPM  [1]   indirect
-xfun                0.40   RSPM     0.40   RSPM  [1]   indirect
-xml2               1.3.5   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
-yaml               2.3.7   RSPM    2.3.7   RSPM  [1]   indirect
-zip                2.3.0   RSPM     &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+                         Library Source   Lockfile Source Path Dependency
+DBI                        1.1.3   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+Formula                    1.2-5   RSPM      1.2-5   RSPM  [1]   indirect
+GA                         3.2.3   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+GGally                     2.1.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+Hmisc                      5.1-1   RSPM      5.1-1   RSPM  [1]   indirect
+IsingFit                   0.3.1   RSPM      0.3.1   RSPM  [1]   indirect
+IsingSampler               0.2.3   RSPM      0.2.3   RSPM  [1]   indirect
+KernSmooth               2.23-21   CRAN       &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
+MASS                      7.3-60   CRAN     7.3-60   CRAN  [2]   indirect
+Matrix                   1.6-1.1   RSPM    1.6-1.1   RSPM  [1]   indirect
+MatrixModels               0.5-2   RSPM      0.5-2   RSPM  [1]   indirect
+NetworkComparisonTest      2.2.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]     direct
+NetworkToolbox             1.4.2   RSPM      1.4.2   RSPM  [1]   indirect
+R.matlab                   3.7.0   RSPM      3.7.0   RSPM  [1]   indirect
+R.methodsS3                1.8.2   RSPM      1.8.2   RSPM  [1]   indirect
+R.oo                      1.25.0   RSPM     1.25.0   RSPM  [1]   indirect
+R.utils                   2.12.2   RSPM     2.12.2   RSPM  [1]   indirect
+R6                         2.5.1   RSPM      2.5.1   RSPM  [1]   indirect
+RColorBrewer               1.1-3   RSPM      1.1-3   RSPM  [1]   indirect
+Rcpp                      1.0.11   RSPM     1.0.11   RSPM  [1]   indirect
+RcppArmadillo         0.12.6.4.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+RcppEigen              0.3.3.9.3   RSPM  0.3.3.9.3   RSPM  [1]   indirect
+SparseM                     1.81   RSPM       1.81   RSPM  [1]   indirect
+UpSetR                     1.4.0   RSPM      1.4.0   RSPM  [1]   indirect
+VCA                        1.4.5   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+abind                      1.4-5   RSPM      1.4-5   RSPM  [1]   indirect
+askpass                    1.2.0   RSPM      1.2.0   RSPM  [1]   indirect
+backports                  1.4.1   RSPM      1.4.1   RSPM  [1]   indirect
+base64enc                  0.1-3   RSPM      0.1-3   RSPM  [1]   indirect
+bdsmatrix                  1.3-6   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+bit                        4.0.5   RSPM      4.0.5   RSPM  [1]   indirect
+bit64                      4.0.5   RSPM      4.0.5   RSPM  [1]   indirect
+blob                       1.2.4   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+boot                    1.3-28.1   CRAN   1.3-28.1   CRAN  [2]   indirect
+bootnet                    1.5.5   RSPM      1.5.5   RSPM  [1]     direct
+brio                       1.1.3   RSPM      1.1.3   RSPM  [1]   indirect
+broom                      1.0.5   RSPM      1.0.5   RSPM  [1]   indirect
+bslib                      0.5.1   RSPM      0.5.1   RSPM  [1]   indirect
+cachem                     1.0.8   RSPM      1.0.8   RSPM  [1]   indirect
+callr                      3.7.3   RSPM      3.7.3   RSPM  [1]   indirect
+candisc                    0.8-6   RSPM      0.8-6   RSPM  [1]   indirect
+car                        3.1-2   RSPM      3.1-2   RSPM  [1]   indirect
+carData                    3.0-5   RSPM      3.0-5   RSPM  [1]   indirect
+cellranger                 1.1.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+checkmate                  2.2.0   RSPM      2.2.0   RSPM  [1]   indirect
+class                     7.3-22   CRAN     7.3-22   CRAN  [2]   indirect
+cli                        3.6.1   RSPM      3.6.1   RSPM  [1]   indirect
+clipr                      0.8.0   RSPM      0.8.0   RSPM  [1]   indirect
+cluster                    2.1.4   CRAN      2.1.4   CRAN  [2]   indirect
+cocor                      1.1-4   RSPM      1.1-4   RSPM  [1]   indirect
+codetools                 0.2-19   CRAN     0.2-19   CRAN  [2]   indirect
+colorspace                 2.1-0   RSPM      2.1-0   RSPM  [1]   indirect
+combinat                   0.0-8   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+compiler                    &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+conflicted                 1.2.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+corpcor                   1.6.10   RSPM     1.6.10   RSPM  [1]   indirect
+corrplot                    0.92   RSPM       0.92   RSPM  [1]   indirect
+cpp11                      0.4.6   RSPM      0.4.6   RSPM  [1]   indirect
+crayon                     1.5.2   RSPM      1.5.2   RSPM  [1]   indirect
+credentials                2.0.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+curl                       5.0.2   RSPM      5.0.2   RSPM  [1]   indirect
+data.table                1.14.8   RSPM     1.14.8   RSPM  [1]   indirect
+dbplyr                     2.3.4   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+desc                       1.4.2   RSPM      1.4.2   RSPM  [1]   indirect
+diffobj                    0.3.5   RSPM      0.3.5   RSPM  [1]   indirect
+digest                    0.6.33   RSPM     0.6.33   RSPM  [1]   indirect
+doParallel                1.0.17   RSPM     1.0.17   RSPM  [1]   indirect
+dplyr                      1.1.3   RSPM      1.1.3   RSPM  [1]     direct
+dtplyr                     1.3.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+e1071                     1.7-13   RSPM     1.7-13   RSPM  [1]   indirect
+eigenmodel                  1.11   RSPM       1.11   RSPM  [1]   indirect
+ellipse                    0.5.0   RSPM      0.5.0   RSPM  [1]   indirect
+ellipsis                   0.3.2   RSPM      0.3.2   RSPM  [1]   indirect
+evaluate                    0.21   RSPM       0.21   RSPM  [1]   indirect
+fansi                      1.0.4   RSPM      1.0.4   RSPM  [1]   indirect
+farver                     2.1.1   RSPM      2.1.1   RSPM  [1]   indirect
+fastmap                    1.1.1   RSPM      1.1.1   RSPM  [1]   indirect
+fdrtool                   1.2.17   RSPM     1.2.17   RSPM  [1]   indirect
+finalfit                   1.0.6   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+fontawesome                0.5.1   RSPM      0.5.1   RSPM  [1]   indirect
+forcats                    1.0.0   RSPM      1.0.0   RSPM  [1]   indirect
+foreach                    1.5.2   RSPM      1.5.2   RSPM  [1]   indirect
+foreign                   0.8-84   CRAN     0.8-84   CRAN  [2]   indirect
+fs                         1.6.3   RSPM      1.6.3   RSPM  [1]   indirect
+gargle                     1.5.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+gdata                     2.19.0   RSPM     2.19.0   RSPM  [1]   indirect
+generics                   0.1.3   RSPM      0.1.3   RSPM  [1]   indirect
+gert                       2.0.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+ggplot2                    3.4.3   RSPM      3.4.3   RSPM  [1]   indirect
+gh                         1.4.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+gitcreds                   0.1.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+glasso                      1.11   RSPM       1.11   RSPM  [1]   indirect
+glmnet                     4.1-8   RSPM      4.1-8   RSPM  [1]   indirect
+glue                       1.6.2   RSPM      1.6.2   RSPM  [1]   indirect
+googledrive                2.1.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+googlesheets4              1.1.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+grDevices                   &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+graphics                    &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+grid                        &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+gridExtra                    2.3   RSPM        2.3   RSPM  [1]   indirect
+gtable                     0.3.4   RSPM      0.3.4   RSPM  [1]   indirect
+gtools                     3.9.4   RSPM      3.9.4   RSPM  [1]   indirect
+haven                      2.5.3   RSPM      2.5.3   RSPM  [1]   indirect
+heplots                    1.6.0   RSPM      1.6.0   RSPM  [1]   indirect
+highr                       0.10   RSPM       0.10   RSPM  [1]   indirect
+hms                        1.1.3   RSPM      1.1.3   RSPM  [1]   indirect
+htmlTable                  2.4.1   RSPM      2.4.1   RSPM  [1]   indirect
+htmltools                  0.5.6   RSPM      0.5.6   RSPM  [1]   indirect
+htmlwidgets                1.6.2   RSPM      1.6.2   RSPM  [1]   indirect
+httr                       1.4.7   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+httr2                      0.2.3   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+ids                        1.0.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+igraph                     1.5.1   RSPM      1.5.1   RSPM  [1]   indirect
+ini                        0.3.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+isoband                    0.2.7   RSPM      0.2.7   RSPM  [1]   indirect
+iterators                 1.0.14   RSPM     1.0.14   RSPM  [1]   indirect
+jomo                       2.7-6   RSPM      2.7-6   RSPM  [1]   indirect
+jpeg                      0.1-10   RSPM     0.1-10   RSPM  [1]   indirect
+jquerylib                  0.1.4   RSPM      0.1.4   RSPM  [1]   indirect
+jsonlite                   1.8.7   RSPM      1.8.7   RSPM  [1]   indirect
+knitr                       1.43   RSPM       1.43   RSPM  [1]     direct
+labeling                   0.4.3   RSPM      0.4.3   RSPM  [1]   indirect
+later                      1.3.1   RSPM      1.3.1   RSPM  [1]   indirect
+lattice                   0.21-8   CRAN     0.21-8   CRAN  [2]   indirect
+lavaan                    0.6-16   RSPM     0.6-16   RSPM  [1]   indirect
+lifecycle                  1.0.3   RSPM      1.0.3   RSPM  [1]   indirect
+lme4                      1.1-34   RSPM     1.1-34   RSPM  [1]   indirect
+lubridate                  1.9.3   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+magrittr                   2.0.3   RSPM      2.0.3   RSPM  [1]   indirect
+memoise                    2.0.1   RSPM      2.0.1   RSPM  [1]   indirect
+methods                     &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+mgcv                      1.8-42   CRAN     1.8-42   CRAN  [2]   indirect
+mgm                       1.2-14   RSPM     1.2-14   RSPM  [1]   indirect
+mice                      3.16.0   RSPM     3.16.0   RSPM  [1]   indirect
+mime                        0.12   RSPM       0.12   RSPM  [1]   indirect
+minqa                      1.2.6   RSPM      1.2.6   RSPM  [1]   indirect
+mitml                      0.4-5   RSPM      0.4-5   RSPM  [1]   indirect
+mnormt                     2.1.1   RSPM      2.1.1   RSPM  [1]   indirect
+modelr                    0.1.11   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+munsell                    0.5.0   RSPM      0.5.0   RSPM  [1]   indirect
+mvtnorm                    1.2-3   RSPM      1.2-3   RSPM  [1]   indirect
+naniar                     1.0.0   RSPM      1.0.0   RSPM  [1]     direct
+networktools               1.5.1   RSPM      1.5.1   RSPM  [1]   indirect
+nlme                     3.1-162   CRAN    3.1-162   CRAN  [2]   indirect
+nloptr                     2.0.3   RSPM      2.0.3   RSPM  [1]   indirect
+nnet                      7.3-19   CRAN     7.3-19   CRAN  [2]   indirect
+nnls                         1.5   RSPM        1.5   RSPM  [1]   indirect
+norm                    1.0-11.1   RSPM   1.0-11.1   RSPM  [1]   indirect
+numDeriv              2016.8-1.1   RSPM 2016.8-1.1   RSPM  [1]   indirect
+openssl                    2.1.1   RSPM      2.1.1   RSPM  [1]   indirect
+optimx                 2023-8.13   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+ordinal               2022.11-16   RSPM 2022.11-16   RSPM  [1]   indirect
+pROC                      1.18.4   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+packrat                    0.9.2   RSPM      0.9.2   RSPM  [1]   indirect
+pan                          1.9   RSPM        1.9   RSPM  [1]   indirect
+parallel                    &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+pbapply                    1.7-2   RSPM      1.7-2   RSPM  [1]   indirect
+pbivnorm                   0.6.0   RSPM      0.6.0   RSPM  [1]   indirect
+pbkrtest                   0.5.2   RSPM      0.5.2   RSPM  [1]   indirect
+pbv                       0.4-22   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+pillar                     1.9.0   RSPM      1.9.0   RSPM  [1]   indirect
+pkgbuild                   1.4.2   RSPM      1.4.2   RSPM  [1]   indirect
+pkgconfig                  2.0.3   RSPM      2.0.3   RSPM  [1]   indirect
+pkgload                    1.3.3   RSPM      1.3.3   RSPM  [1]   indirect
+plotrix                    3.8-2   RSPM      3.8-2   RSPM  [1]   indirect
+plyr                       1.8.8   RSPM      1.8.8   RSPM  [1]   indirect
+png                        0.1-8   RSPM      0.1-8   RSPM  [1]   indirect
+polynom                    1.4-1   RSPM      1.4-1   RSPM  [1]   indirect
+ppcor                        1.1   RSPM        1.1   RSPM  [1]   indirect
+pracma                     2.4.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+praise                     1.0.0   RSPM      1.0.0   RSPM  [1]   indirect
+prettyunits                1.2.0   RSPM      1.2.0   RSPM  [1]   indirect
+processx                   3.8.2   RSPM      3.8.2   RSPM  [1]   indirect
+progress                   1.2.2   RSPM      1.2.2   RSPM  [1]   indirect
+proxy                     0.4-27   RSPM     0.4-27   RSPM  [1]   indirect
+ps                         1.7.5   RSPM      1.7.5   RSPM  [1]   indirect
+psych                      2.3.9   RSPM      2.3.9   RSPM  [1]   indirect
+psychonetrics               0.11   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+purrr                      1.0.2   RSPM      1.0.2   RSPM  [1]   indirect
+pwr                        1.3-0   RSPM      1.3-0   RSPM  [1]   indirect
+qgraph                     1.9.5   RSPM      1.9.5   RSPM  [1]     direct
+quadprog                   1.5-8   RSPM      1.5-8   RSPM  [1]   indirect
+quantreg                    5.97   RSPM       5.97   RSPM  [1]   indirect
+quarto                       1.3   RSPM        1.3   RSPM  [1]     direct
+ragg                       1.2.5   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+rappdirs                   0.3.3   RSPM      0.3.3   RSPM  [1]   indirect
+readr                      2.1.4   RSPM      2.1.4   RSPM  [1]   indirect
+readxl                     1.4.3   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+rematch                    2.0.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+rematch2                   2.1.2   RSPM      2.1.2   RSPM  [1]   indirect
+renv                       1.0.2   RSPM      1.0.2   RSPM  [1]     direct
+reprex                     2.0.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+reshape                    0.8.9   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+reshape2                   1.4.4   RSPM      1.4.4   RSPM  [1]     direct
+rgl                        1.2.1   RSPM      1.2.1   RSPM  [1]   indirect
+rlang                      1.1.1   RSPM      1.1.1   RSPM  [1]   indirect
+rmarkdown                   2.24   RSPM       2.24   RSPM  [1]     direct
+roptim                     0.1.6   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+rpart                     4.1.19   CRAN     4.1.19   CRAN  [2]   indirect
+rprojroot                  2.0.3   RSPM      2.0.3   RSPM  [1]   indirect
+rsconnect                  1.1.0   RSPM      1.1.0   RSPM  [1]   indirect
+rstudioapi                0.15.0   RSPM     0.15.0   RSPM  [1]   indirect
+rvest                      1.0.3   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+sass                       0.4.7   RSPM      0.4.7   RSPM  [1]   indirect
+scales                     1.2.1   RSPM      1.2.1   RSPM  [1]   indirect
+selectr                    0.4-2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+shape                      1.4.6   RSPM      1.4.6   RSPM  [1]   indirect
+smacof                     2.1-5   RSPM      2.1-5   RSPM  [1]   indirect
+snow                       0.4-4   RSPM      0.4-4   RSPM  [1]   indirect
+spatial                   7.3-16   CRAN       &lt;NA&gt;   &lt;NA&gt;  [2]       &lt;NA&gt;
+splines                     &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+stats                       &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+stats4                      &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+stringi                   1.7.12   RSPM     1.7.12   RSPM  [1]   indirect
+stringr                    1.5.0   RSPM      1.5.0   RSPM  [1]   indirect
+survival                   3.5-5   CRAN      3.5-5   CRAN  [2]   indirect
+sys                        3.4.2   RSPM      3.4.2   RSPM  [1]   indirect
+systemfonts                1.0.4   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+testthat                  3.1.10   RSPM     3.1.10   RSPM  [1]   indirect
+textshaping                0.3.6   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+tibble                     3.2.1   RSPM      3.2.1   RSPM  [1]   indirect
+tidyr                      1.3.0   RSPM      1.3.0   RSPM  [1]   indirect
+tidyselect                 1.2.0   RSPM      1.2.0   RSPM  [1]   indirect
+tidyverse                  2.0.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+timechange                 0.2.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+tinytex                     0.46   RSPM       0.46   RSPM  [1]   indirect
+tools                       &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+tzdb                       0.4.0   RSPM      0.4.0   RSPM  [1]   indirect
+ucminf                     1.2.0   RSPM      1.2.0   RSPM  [1]   indirect
+usethis                    2.2.2   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+utf8                       1.2.3   RSPM      1.2.3   RSPM  [1]   indirect
+utils                       &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;  [2]   indirect
+uuid                       1.1-1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+vctrs                      0.6.3   RSPM      0.6.3   RSPM  [1]   indirect
+viridis                    0.6.4   RSPM      0.6.4   RSPM  [1]   indirect
+viridisLite                0.4.2   RSPM      0.4.2   RSPM  [1]   indirect
+visdat                     0.6.0   RSPM      0.6.0   RSPM  [1]   indirect
+vroom                      1.6.3   RSPM      1.6.3   RSPM  [1]   indirect
+waldo                      0.5.1   RSPM      0.5.1   RSPM  [1]   indirect
+weights                    1.0.4   RSPM      1.0.4   RSPM  [1]   indirect
+whisker                    0.4.1   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+withr                      2.5.1   RSPM      2.5.1   RSPM  [1]   indirect
+wordcloud                    2.6   RSPM        2.6   RSPM  [1]   indirect
+xfun                        0.40   RSPM       0.40   RSPM  [1]   indirect
+xml2                       1.3.5   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
+yaml                       2.3.7   RSPM      2.3.7   RSPM  [1]   indirect
+zip                        2.3.0   RSPM       &lt;NA&gt;   &lt;NA&gt;  [1]       &lt;NA&gt;
 
 [1]: C:/Users/PE78688/Documents/RProjects/NRP_supplementary/renv/library/R-4.3/x86_64-w64-mingw32
 [2]: C:/Users/PE78688/AppData/Local/R/cache/R/renv/sandbox/R-4.3/x86_64-w64-mingw32/bd3f13aa     
@@ -522,8 +603,8 @@ List of 8
  $ renv.verbose                        : logi TRUE
 
 # Environment Variables ------------------------------------------------------
-HOME                        = C:\Users\PE78688
-LANG                        = fi_FI.UTF-8
+HOME                        = C:/Users/PE78688/Documents
+LANG                        = &lt;NA&gt;
 MAKE                        = &lt;NA&gt;
 R_LIBS                      = &lt;NA&gt;
 R_LIBS_SITE                 = C:/PROGRA~1/R/R-43~1.1/site-library
@@ -542,41 +623,26 @@ RENV_PROJECT                = C:/Users/PE78688/Documents/RProjects/NRP_supplemen
 - c:/rtools43/x86_64-w64-mingw32.static.posix/bin
 - c:/rtools43/usr/bin
 - C:\rtools40\usr\bin
-- C:\Users\PE78688\bin
-- C:\Program Files\Git\mingw64\bin
-- C:\Program Files\Git\usr\local\bin
-- C:\Program Files\Git\usr\bin
-- C:\Program Files\Git\usr\bin
-- C:\Program Files\Git\mingw64\bin
-- C:\Program Files\Git\usr\bin
-- C:\Users\PE78688\bin
 - C:\rtools40\usr\bin
-- C:\rtools43\x86_64-w64-mingw32.static.posix\bin
-- C:\rtools43\usr\bin
+- c:\rtools43\x86_64-w64-mingw32.static.posix\bin
+- c:\rtools43\usr\bin
 - C:\rtools40\usr\bin
-- C:\Program Files\R\R-4.3.1\bin\x64
 - C:\Program Files\R\R-4.3.1\bin\x64
 - C:\Program Files\Quarto\bin
 - C:\WINDOWS\system32
 - C:\WINDOWS
 - C:\WINDOWS\System32\Wbem
-- C:\WINDOWS\System32\WindowsPowerShell\v1.0
-- C:\WINDOWS\System32\OpenSSH
+- C:\WINDOWS\System32\WindowsPowerShell\v1.0\
+- C:\WINDOWS\System32\OpenSSH\
 - C:\Program Files\Git\cmd
 - C:\Users\PE78688\AppData\Local\Microsoft\WindowsApps
 - C:\rtools40\mingw64\bin
 - C:\Program Files\Quarto\bin
 - C:\Program Files\RStudio\resources\app\bin\postback
-- C:\Program Files\RStudio\resources\app\bin\rpostback.exe
-- C:\Program Files\RStudio\resources\app\bin\postback.exe
-- C:\Program Files\Git\mingw64\bin
-- C:\Program Files\RStudio\resources\app\bin\msys-ssh-1000-18
-- C:\Program Files\Git\usr\bin\vendor_perl
-- C:\Program Files\Git\usr\bin\core_perl
 
 # Cache ----------------------------------------------------------------------
-There are a total of 121 packages installed in the renv cache.
-Cache path: "~/AppData/Local/R/cache/R/renv/cache/v5/R-4.3/x86_64-w64-mingw32"</code></pre>
+There are a total of 190 packages installed in the renv cache.
+Cache path: "C:/Users/PE78688/AppData/Local/R/cache/R/renv/cache/v5/R-4.3/x86_64-w64-mingw32"</code></pre>
 </div>
 </div>
 

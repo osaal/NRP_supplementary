@@ -13,7 +13,7 @@ The data were collected by a third party and given to the researchers as an SPSS
 @tbl-spss-exported-variables shows the collected variables with original questions and short-hand names.
 
 | Exported name      | Survey question                                                                                                          | Short-hand name |
-|------------|------------------------------------------------|------------|
+|---------------|-------------------------------------------|---------------|
 | question_3_row_1   | Extreme weather phenomena (flood, drought, storm etc.)                                                                   | Weather         |
 | question_3_row_2   | Traffic accident                                                                                                         | Traffic         |
 | question_3_row_3   | Fire                                                                                                                     | Fire            |
@@ -203,12 +203,20 @@ This code section is found on rows `77-85` in the `prerender.R` source file.
 
 ```{r}
 #| label: tbl-hazard-experience-crosstab
+#| tbl-cap: Correspondence between dichotomous and quantitative emergency service contact experience measure. First column values represent number of experiences.
 
 crosstab.comp <- data.frame(matrix(nrow = 3055, ncol = 2))
 exp.quantitative <- rowSums(data[, exp.variables]) %>% tibble()
 crosstab.comp$X1 <- exp.quantitative$.
 crosstab.comp$X2 <- experience$Experience.Dichotomy
-ftable(table(crosstab.comp$X1, crosstab.comp$X2, dnn = c("Quantitative", "Dichotomous")))
+
+table(crosstab.comp$X1, crosstab.comp$X2) %>%
+  ftable() %>%
+  as.table() %>%
+  knitr::kable(
+    .,
+    col.names = c("0 - No experience", "1 - Experience")
+    )
 ```
 
 The dichotomous groups have the following counts: 736 respondents have had at least one hazard experience, and 2319 respondents have not had a single hazard experience during the past 12 months.
@@ -224,6 +232,6 @@ We then proceeded to check that all data had been correctly entered and modified
 knitr::kable(summary(data, digits = 2))
 ```
 
-This table corresponds to **Table 1** in the published manuscript.
+This table corresponds to **Table 1** in the published manuscript. Means and medians are retrieved directly from this table, and missing values correspond to the last row (NA's) in this table.
 
 The original data set had no missing values on any variable. Since there are missing values on the fourteen risk perception variables, we conclude that the conversion is correct. There are no missing values on the experience variables, which is to be expected, as the lack of response to one variable was coded as `0` ("no").

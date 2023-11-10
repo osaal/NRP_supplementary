@@ -112,13 +112,36 @@ print(paste0(
 ))
 ```
 
-The flow diagram for the Leisure node is generated below, and corresponds to **Figure 3** in the published manuscript.
+The flow diagram for the Leisure node is generated below. Please note, that the diagram uses a minimum correlation size threshold of 0.05, wherein absolute tie strengths below 0.05 are visually omitted (but still computed). This is to de-clutter the image. For comparison, we also generated one without the minimum threshold, which we did not use in the original manuscript but opted to publish here. The first figure corresponds to **Figure 3** in the published manuscript.
 
 ```{r}
 #| label: fig-hybrid-flow-diagram
 #| fig-cap: Flow diagram of the Hybrid node.
+#| layout-ncol: 2
+#| fig-subcap: 
+#| - With minimum visual threshold 0.05 (published in manuscript)
+#| - With no visual threshold
 
-plot(qgraph::flow(network$sample$graph, from = 6, theme = "colorblind"))
+plot(
+  qgraph::flow(
+    network$sample$graph,
+    from = 6,
+    theme = "colorblind",
+    edge.labels = TRUE,
+    labels = network$sample$labels,
+    minimum = 0.05
+    )
+  )
+
+plot(
+  qgraph::flow(
+    network$sample$graph,
+    from = 6,
+    theme = "colorblind",
+    edge.labels = TRUE,
+    labels = network$sample$labels
+    )
+  )
 ```
 
 ## Network Characteristics
@@ -143,6 +166,7 @@ The results are shown visually in @fig-cs-stability below, with a dashed vertica
 
 ```{r}
 #| label: fig-cs-stability
+#| fig-cap: Correlation Stability over case-dropping. Cases are dropped randomly approximately 100 at at time and centrality measures re-estimated and correlated with their counterparts for the total sample network. The higher the correlation stays as more cases are dropped, the more stable the measurement is.
 
 plot(network, statistics = "all") +
   geom_hline(yintercept = 0.7, color = "grey", linetype = "dashed")
@@ -170,6 +194,7 @@ We started by estimating two models on the two groups separately, using the same
 
 ```{r}
 #| label: subgroup-networks
+#| cache: true
 
 exp.0.network <- data %>%
   dplyr::filter(Experience.Dichotomy == 0) %>%
