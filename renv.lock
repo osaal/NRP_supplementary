@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.3",
+    "Version": "4.3.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -119,24 +119,6 @@
         "stats"
       ],
       "Hash": "26749bd5c7c4123dd23aeb9159be22d6"
-    },
-    "NetworkComparisonTest": {
-      "Package": "NetworkComparisonTest",
-      "Version": "2.2.2",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "IsingFit",
-        "Matrix",
-        "graphics",
-        "methods",
-        "networktools",
-        "qgraph",
-        "reshape2",
-        "stats",
-        "utils"
-      ],
-      "Hash": "ec776853f3372ed4275c3e2037e2a3ed"
     },
     "NetworkToolbox": {
       "Package": "NetworkToolbox",
@@ -1666,10 +1648,7 @@
       "Version": "1.9",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "aefe2753a8e7277e0fdd6d1d08d1692e"
+      "Hash": "495d032ad6bfc725f37ce89e3d6dadb2"
     },
     "pbapply": {
       "Package": "pbapply",
